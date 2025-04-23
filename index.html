@@ -775,73 +775,78 @@
     </section>
 
     <!-- Pixel Avatar Generator Section -->
-<section id="avatar-generator">
-    <h2 class="section-title">PIXEL AVATAR GENERATOR</h2>
-    <div class="contact-container">
-        <div class="window pixel-corners fade-in">
-            <div class="window-header">
-                <div class="window-title">avatar.exe</div>
-                <div class="window-controls">
-                    <div class="control"></div>
-                    <div class="control"></div>
-                    <div class="control"></div>
-                </div>
-            </div>
-            <div class="window-content">
-                <div class="avatar-generator">
-                    <div class="avatar-container">
-                        <canvas id="avatarCanvas" width="160" height="160" class="pixel-corners"></canvas>
+    <section id="avatar-generator">
+        <h2 class="section-title">PIXEL AVATAR GENERATOR</h2>
+        <div class="avatar-wrapper">
+            <div class="window pixel-corners fade-in">
+                <div class="window-header">
+                    <div class="window-title">avatar.exe</div>
+                    <div class="window-controls">
+                        <div class="control"></div>
+                        <div class="control"></div>
+                        <div class="control"></div>
                     </div>
-                    <div class="avatar-controls">
-                        <div class="control-group">
-                            <label class="form-label">SKIN COLOR:</label>
-                            <div class="color-options">
-                                <button class="color-btn pixel-corners" data-type="skin" data-color="#ffdbac" style="background-color: #ffdbac;"></button>
-                                <button class="color-btn pixel-corners" data-type="skin" data-color="#f1c27d" style="background-color: #f1c27d;"></button>
-                                <button class="color-btn pixel-corners" data-type="skin" data-color="#e0ac69" style="background-color: #e0ac69;"></button>
-                                <button class="color-btn pixel-corners" data-type="skin" data-color="#c68642" style="background-color: #c68642;"></button>
-                                <button class="color-btn pixel-corners" data-type="skin" data-color="#8d5524" style="background-color: #8d5524;"></button>
-                            </div>
+                </div>
+                <div class="window-content">
+                    <div class="avatar-generator">
+                        <div class="avatar-container">
+                            <canvas id="avatarCanvas" width="160" height="160" class="pixel-corners"></canvas>
                         </div>
-                        <div class="control-group">
-                            <label class="form-label">HAIR COLOR:</label>
-                            <div class="color-options">
-                                <button class="color-btn pixel-corners" data-type="hair" data-color="#090806" style="background-color: #090806;"></button>
-                                <button class="color-btn pixel-corners" data-type="hair" data-color="#a52a2a" style="background-color: #a52a2a;"></button>
-                                <button class="color-btn pixel-corners" data-type="hair" data-color="#d4a373" style="background-color: #d4a373;"></button>
-                                <button class="color-btn pixel-corners" data-type="hair" data-color="#dbc792" style="background-color: #dbc792;"></button>
-                                <button class="color-btn pixel-corners" data-type="hair" data-color="#708090" style="background-color: #708090;"></button>
+                        <div class="avatar-controls">
+                            <div class="control-group">
+                                <label class="form-label">SKIN COLOR:</label>
+                                <div class="color-options">
+                                    <button class="color-btn pixel-corners" data-type="skin" data-color="#ffdbac" style="background-color: #ffdbac;"></button>
+                                    <button class="color-btn pixel-corners" data-type="skin" data-color="#f1c27d" style="background-color: #f1c27d;"></button>
+                                    <button class="color-btn pixel-corners" data-type="skin" data-color="#e0ac69" style="background-color: #e0ac69;"></button>
+                                    <button class="color-btn pixel-corners" data-type="skin" data-color="#c68642" style="background-color: #c68642;"></button>
+                                    <button class="color-btn pixel-corners" data-type="skin" data-color="#8d5524" style="background-color: #8d5524;"></button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="form-label">HAIR STYLE:</label>
-                            <div class="style-options">
-                                <button class="style-btn pixel-corners" data-type="hairstyle" data-style="1">Style 1</button>
-                                <button class="style-btn pixel-corners" data-type="hairstyle" data-style="2">Style 2</button>
-                                <button class="style-btn pixel-corners" data-type="hairstyle" data-style="3">Style 3</button>
+                            <div class="control-group">
+                                <label class="form-label">HAIR COLOR:</label>
+                                <div class="color-options">
+                                    <button class="color-btn pixel-corners" data-type="hair" data-color="#090806" style="background-color: #090806;"></button>
+                                    <button class="color-btn pixel-corners" data-type="hair" data-color="#a52a2a" style="background-color: #a52a2a;"></button>
+                                    <button class="color-btn pixel-corners" data-type="hair" data-color="#d4a373" style="background-color: #d4a373;"></button>
+                                    <button class="color-btn pixel-corners" data-type="hair" data-color="#dbc792" style="background-color: #dbc792;"></button>
+                                    <button class="color-btn pixel-corners" data-type="hair" data-color="#708090" style="background-color: #708090;"></button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="form-label">GLASSES:</label>
-                            <div class="style-options">
-                                <button class="style-btn pixel-corners" data-type="glasses" data-style="none">None</button>
-                                <button class="style-btn pixel-corners" data-type="glasses" data-style="round">Round</button>
-                                <button class="style-btn pixel-corners" data-type="glasses" data-style="square">Square</button>
+                            <div class="control-group">
+                                <label class="form-label">HAIR STYLE:</label>
+                                <div class="style-options">
+                                    <button class="style-btn pixel-corners" data-type="hairstyle" data-style="1">Style 1</button>
+                                    <button class="style-btn pixel-corners" data-type="hairstyle" data-style="2">Style 2</button>
+                                    <button class="style-btn pixel-corners" data-type="hairstyle" data-style="3">Style 3</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="button-group">
-                            <button id="randomizeBtn" class="cta-btn pixel-corners">RANDOMIZE</button>
-                            <button id="downloadBtn" class="cta-btn pixel-corners">DOWNLOAD</button>
+                            <div class="control-group">
+                                <label class="form-label">GLASSES:</label>
+                                <div class="style-options">
+                                    <button class="style-btn pixel-corners" data-type="glasses" data-style="none">None</button>
+                                    <button class="style-btn pixel-corners" data-type="glasses" data-style="round">Round</button>
+                                    <button class="style-btn pixel-corners" data-type="glasses" data-style="square">Square</button>
+                                </div>
+                            </div>
+                            <div class="button-group">
+                                <button id="randomizeBtn" class="cta-btn pixel-corners">RANDOMIZE</button>
+                                <button id="downloadBtn" class="cta-btn pixel-corners">DOWNLOAD</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<style>
-    /* Avatar Generator Styles */
+    <style>
+        /* Avatar Generator Styles */
+    .avatar-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
     .avatar-generator {
         display: flex;
         flex-direction: column;
@@ -912,18 +917,37 @@
         margin-top: 1rem;
     }
     
+    /* Medium screens */
     @media (min-width: 768px) {
         .avatar-generator {
             flex-direction: row;
             align-items: flex-start;
+            justify-content: center;
         }
         
         .avatar-container {
             flex: 0 0 auto;
+            margin-right: 2rem;
         }
         
         .avatar-controls {
             flex: 1;
+            max-width: 400px;
+        }
+    }
+    
+    /* Large screens */
+    @media (min-width: 1200px) {
+        .avatar-container {
+            margin-right: 3rem;
+        }
+        
+        .avatar-controls {
+            max-width: 500px;
+        }
+        
+        .control-group {
+            margin-bottom: 0.5rem;
         }
     }
 </style>
