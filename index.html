@@ -230,22 +230,46 @@
             left: 100%;
         }
         
-        /* Windows Section */
-        .windows-section {
+        /* Section styles */
+        section {
+            padding: 5rem 2rem;
+        }
+        
+        .section-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2rem;
+            color: var(--accent);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: var(--accent);
+            margin-top: 10px;
+        }
+        
+        /* Windows Section for About */
+        .windows-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 2rem;
-            padding: 5rem 2rem;
-            perspective: 1000px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .window {
             background-color: var(--window-bg);
-            width: 350px;
+            width: 48%;
+            min-width: 300px;
             border: 4px solid var(--primary);
             transform-style: preserve-3d;
             transition: transform 0.5s;
+            margin-bottom: 2rem;
         }
         
         .window:hover {
@@ -312,32 +336,13 @@
             pointer-events: none;
         }
         
-        .section-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: var(--accent);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            width: 50%;
-            height: 4px;
-            background-color: var(--accent);
-            bottom: -10px;
-            left: 25%;
-        }
-        
-        /* Projects */
-        .projects {
+        /* Projects Section */
+        .projects-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
-            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .project-card {
@@ -404,14 +409,6 @@
         }
         
         /* About section */
-        .about-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            padding: 5rem 2rem;
-        }
-        
         .about-text {
             flex: 1;
             min-width: 300px;
@@ -457,14 +454,15 @@
         }
         
         /* Contact */
-        .contact {
-            padding: 5rem 2rem;
-            text-align: center;
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
         }
         
         .contact-form {
-            max-width: 600px;
-            margin: 0 auto;
+            width: 100%;
         }
         
         .form-group {
@@ -576,10 +574,6 @@
                 display: none;
             }
             
-            .projects {
-                grid-template-columns: 1fr;
-            }
-            
             .window {
                 width: 100%;
             }
@@ -609,20 +603,19 @@
     </section>
     
     <!-- About Section -->
-    <section id="about" class="windows-section">
+    <section id="about">
         <h2 class="section-title">ABOUT ME</h2>
-        
-        <div class="window pixel-corners fade-in">
-            <div class="window-header">
-                <div class="window-title">bio.exe</div>
-                <div class="window-controls">
-                    <div class="control"></div>
-                    <div class="control"></div>
-                    <div class="control"></div>
+        <div class="windows-container">
+            <div class="window pixel-corners fade-in">
+                <div class="window-header">
+                    <div class="window-title">bio.exe</div>
+                    <div class="window-controls">
+                        <div class="control"></div>
+                        <div class="control"></div>
+                        <div class="control"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="window-content">
-                <div class="about-container">
+                <div class="window-content">
                     <div class="about-text">
                         <p>Hello! I'm a computer science graduate with a passion for creating beautiful, functional websites and applications.</p>
                         <p>With skills in front-end and back-end development, I enjoy turning complex problems into simple, beautiful solutions. My goal is always to build products that are both visually appealing and user-friendly.</p>
@@ -630,62 +623,62 @@
                     </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="window pixel-corners fade-in">
-            <div class="window-header">
-                <div class="window-title">skills.exe</div>
-                <div class="window-controls">
-                    <div class="control"></div>
-                    <div class="control"></div>
-                    <div class="control"></div>
+            
+            <div class="window pixel-corners fade-in">
+                <div class="window-header">
+                    <div class="window-title">skills.exe</div>
+                    <div class="window-controls">
+                        <div class="control"></div>
+                        <div class="control"></div>
+                        <div class="control"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="window-content">
-                <div class="skills">
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>HTML/CSS</span>
-                            <span>90%</span>
+                <div class="window-content">
+                    <div class="skills">
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>HTML/CSS</span>
+                                <span>90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 90%"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%"></div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>JavaScript</span>
+                                <span>85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 85%"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>JavaScript</span>
-                            <span>85%</span>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>React</span>
+                                <span>80%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 80%"></div>
+                            </div>
                         </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%"></div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Node.js</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 75%"></div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>React</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Node.js</span>
-                            <span>75%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 75%"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Python</span>
-                            <span>70%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 70%"></div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Python</span>
+                                <span>70%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-progress" style="width: 70%"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -694,80 +687,82 @@
     </section>
     
     <!-- Projects Section -->
-    <section id="projects" class="projects">
+    <section id="projects">
         <h2 class="section-title">MY PROJECTS</h2>
-        
-        <div class="project-card pixel-corners fade-in">
-            <div class="project-img">
-                <img src="https://placehold.co/400x200/4834d4/dff9fb?text=Pixel+Art+Game" alt="Project 1">
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">Pixel Art Game</h3>
-                <p class="project-desc">A retro-style browser game built with JavaScript and Canvas. Features include multiple levels, pixel-perfect collision detection, and a custom physics engine.</p>
-                <div class="project-links">
-                    <a href="#" title="View Code"><i class="fas fa-code"></i></a>
-                    <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+        <div class="projects-container">
+            <div class="project-card pixel-corners fade-in">
+                <div class="project-img">
+                    <img src="https://placehold.co/400x200/4834d4/dff9fb?text=Pixel+Art+Game" alt="Project 1">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Pixel Art Game</h3>
+                    <p class="project-desc">A retro-style browser game built with JavaScript and Canvas. Features include multiple levels, pixel-perfect collision detection, and a custom physics engine.</p>
+                    <div class="project-links">
+                        <a href="#" title="View Code"><i class="fas fa-code"></i></a>
+                        <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="project-card pixel-corners fade-in">
-            <div class="project-img">
-                <img src="https://placehold.co/400x200/4834d4/dff9fb?text=Weather+App" alt="Project 2">
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">Weather Dashboard</h3>
-                <p class="project-desc">A weather application with a pixel art interface. Uses OpenWeatherMap API to display current weather and forecasts with retro-style animations.</p>
-                <div class="project-links">
-                    <a href="#" title="View Code"><i class="fas fa-code"></i></a>
-                    <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+            
+            <div class="project-card pixel-corners fade-in">
+                <div class="project-img">
+                    <img src="https://placehold.co/400x200/4834d4/dff9fb?text=Weather+App" alt="Project 2">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Weather Dashboard</h3>
+                    <p class="project-desc">A weather application with a pixel art interface. Uses OpenWeatherMap API to display current weather and forecasts with retro-style animations.</p>
+                    <div class="project-links">
+                        <a href="#" title="View Code"><i class="fas fa-code"></i></a>
+                        <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
             </div>
-        </div>
-        
-        <div class="project-card pixel-corners fade-in">
-            <div class="project-img">
-                <img src="https://placehold.co/400x200/4834d4/dff9fb?text=Task+Tracker" alt="Project 3">
-            </div>
-            <div class="project-content">
-                <h3 class="project-title">Task Tracker</h3>
-                <p class="project-desc">A productivity app with a retro interface. Built with React and Firebase, features include drag-and-drop task organization and progress tracking.</p>
-                <div class="project-links">
-                    <a href="#" title="View Code"><i class="fas fa-code"></i></a>
-                    <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+            
+            <div class="project-card pixel-corners fade-in">
+                <div class="project-img">
+                    <img src="https://placehold.co/400x200/4834d4/dff9fb?text=Task+Tracker" alt="Project 3">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Task Tracker</h3>
+                    <p class="project-desc">A productivity app with a retro interface. Built with React and Firebase, features include drag-and-drop task organization and progress tracking.</p>
+                    <div class="project-links">
+                        <a href="#" title="View Code"><i class="fas fa-code"></i></a>
+                        <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     
     <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <section id="contact">
         <h2 class="section-title">CONTACT ME</h2>
-        
-        <div class="window pixel-corners fade-in">
-            <div class="window-header">
-                <div class="window-title">message.exe</div>
-                <div class="window-controls">
-                    <div class="control"></div>
-                    <div class="control"></div>
-                    <div class="control"></div>
+        <div class="contact-container">
+            <div class="window pixel-corners fade-in">
+                <div class="window-header">
+                    <div class="window-title">message.exe</div>
+                    <div class="window-controls">
+                        <div class="control"></div>
+                        <div class="control"></div>
+                        <div class="control"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="window-content">
-                <div class="contact-form">
-                    <div class="form-group">
-                        <label class="form-label">NAME:</label>
-                        <input type="text" class="form-input pixel-corners">
+                <div class="window-content">
+                    <div class="contact-form">
+                        <div class="form-group">
+                            <label class="form-label">NAME:</label>
+                            <input type="text" class="form-input pixel-corners">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">EMAIL:</label>
+                            <input type="email" class="form-input pixel-corners">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">MESSAGE:</label>
+                            <textarea class="form-textarea pixel-corners"></textarea>
+                        </div>
+                        <button class="cta-btn pixel-corners">SEND MESSAGE</button>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label">EMAIL:</label>
-                        <input type="email" class="form-input pixel-corners">
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">MESSAGE:</label>
-                        <textarea class="form-textarea pixel-corners"></textarea>
-                    </div>
-                    <button class="cta-btn pixel-corners">SEND MESSAGE</button>
                 </div>
             </div>
         </div>
