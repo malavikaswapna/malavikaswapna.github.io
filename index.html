@@ -30,7 +30,15 @@
             font-family: 'VT323', monospace;
             font-size: 18px;
             overflow-x: hidden;
-            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2'><path d='M4 4h16v16H4z'/><path d='M4 4l16 16'/></svg>") 12 12, auto;
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAiARJqtQZQAAARdJREFUOMulkzFOw0AQRd8YIhcUFCDFVVxwAKTUHCGRkHIFDpA6Ze7BASjTpIgQlQvEO0XsaL1Ze7W7/eTRzP55+/dqdQ9cAGMRAbDG+YyzrwJwCdwD48Dz3vl9YDE20fsb4BnYAvUZeAFUgTpQO5JK9N4DX8ALcAdURoBbYOO0TcYYBE6ZDtg6ztZ5nzmn+l8CB2DiLFJr+xazShPPEqfMYLvnUJyIXANPwLIoXv0i5Vj0tW5xziKwEpEKuBGRuR/EzM4bZxuPG0R3YuZ7V6GMNcCFc96YmenA/kxXYDMEqHDL1lQAz4NaOQlI8VuAxcDeJICUKwH9gACmfpC2bXczAFbrTG3bdgZ8hgCVP28BXgHMrKP/+JIFP99Udo9vJOUAAAAASUVORK5CYII=') 0 0, auto;
+        }
+        
+        a, button, .cta-btn, .nav-links a, .project-links a, .social-icons a, .window-controls .control {
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAigPsyY9+QAAAUhJREFUOMuVkzFuwkAQRd8aSqSOI0icIgWHoOQEkVLmCJFS5AApU+YeOUBK2iRFlCIFigWKd4pYaL3e9a53/eTRaP6892tmr78BJkAkIgDa2Z9z9k0AJsADEHme185vneep63oIfAJfQHHhrANyQAUoHUkleu+BH+Ab+ABWd8AnUDuta5uoRpf5QO2c1c7Z2jmvnVP9L8EH8OgsYmP8inOpmXO2cMoU5fAcihMRB3wBL2neAF9CuT/Gbd3qnGVgrSIZ8K4iwfZjFmPGgV2xb7BXkYJQUTZGRcIBkBWbA69AA9wAXG3fNxSogFlVVfF5DtI4EQlOAFL+CvgJvuJUgJQrAf0AAsbBYbfbHe4A8GbdYbfbHYDD9b9QfP1BKpDYvpsCNuFD6rru4EjUdX1wGzRUYH0pQArsgGPf9y0w/0/qp78UcAR+gfzSehLHXfQLx1mS5e7TkKIAAAAASUVORK5CYII=') 0 0, pointer;
+        }
+        
+        input, textarea {
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAiwMXWwfAwAAAOVJREFUOMvNkjEOgkAQRd8uaGMCIfEKHoDGK1BZegRiaeER7Kw9B0ewtLSWxgPgFZTENQG3WFiiQcSCvGSSmZ3/Z/4fVgAWQCgiAJrYT4l9EYA5sARmAXlH4h2AmAR28JsH8kCqQAyorImr0PsEpMCOcKeOACegcNoWxkSFa6qA2jlrnbN2zmvnVH8V4IDCWcTG+hXPpRbO2cpp01R358FaiMgUWANrv9x7YEv492PW1r3OWgaOKqLIvKkRkYXvpItJdsFREy4iAawAJSJFl2CSs2UPYAQkn8AHBgHS/wTm/e04AxI0ZNxg1cjsAAAAAElFTkSuQmCC') 10 10, text;
         }
         
         /* Pixel effect */
@@ -196,7 +204,6 @@
             font-size: 1rem;
             padding: 0.8rem 1.5rem;
             border: none;
-            cursor: pointer;
             text-decoration: none;
             display: inline-block;
             position: relative;
@@ -546,41 +553,6 @@
                 text-shadow: 3px 3px 0 var(--primary);
             }
         }
-
-        /* Custom animated cursor */
-        .custom-cursor {
-            position: fixed;
-            width: 16px;
-            height: 16px;
-            background-color: transparent;
-            border: 2px solid var(--accent);
-            z-index: 9999;
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            transition: all 0.1s ease;
-            mix-blend-mode: difference;
-        }
-
-        .custom-cursor::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 6px;
-            height: 6px;
-            background-color: var(--accent);
-            transform: translate(-50%, -50%);
-            animation: pulse 1.5s infinite alternate;
-        }
-
-        .clickable {
-            cursor: none !important;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
         
         /* Scroll Animations */
         .fade-in {
@@ -615,7 +587,6 @@
     </style>
 </head>
 <body>
-    <div id="custom-cursor" class="custom-cursor"></div>
     <!-- Navigation -->
     <nav>
         <div class="logo">PORTFOLIO</div>
@@ -868,50 +839,12 @@
                 observer.observe(element);
             });
         }
-
-        // Custom cursor
-        function setupCustomCursor() {
-            const cursor = document.getElementById('custom-cursor');
-            
-            document.addEventListener('mousemove', (e) => {
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            });
-        
-            // Make the cursor larger when hovering over clickable elements
-            const clickableElements = document.querySelectorAll('a, button, .window, .project-card');
-            clickableElements.forEach(element => {
-                element.classList.add('clickable');
-                
-                element.addEventListener('mouseenter', () => {
-                    cursor.style.width = '24px';
-                    cursor.style.height = '24px';
-                    cursor.style.borderColor = 'var(--accent)';
-                });
-            
-                element.addEventListener('mouseleave', () => {
-                    cursor.style.width = '16px';
-                    cursor.style.height = '16px';
-                    cursor.style.borderColor = 'var(--accent)';
-                });
-            });
-        
-            // Add click animation
-            document.addEventListener('mousedown', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
-            });
-            
-            document.addEventListener('mouseup', () => {
-                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-            });
-        }
         
         // Initialize
         window.addEventListener('DOMContentLoaded', () => {
             createStars();
             parallax();
             scrollAnimations();
-            setupCustomCursor();
         });
     </script>
 </body>
