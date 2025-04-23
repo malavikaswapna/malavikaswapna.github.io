@@ -749,19 +749,25 @@
                 </div>
                 <div class="window-content">
                     <div class="contact-form">
-                        <div class="form-group">
-                            <label class="form-label">NAME:</label>
-                            <input type="text" class="form-input pixel-corners">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">EMAIL:</label>
-                            <input type="email" class="form-input pixel-corners">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">MESSAGE:</label>
-                            <textarea class="form-textarea pixel-corners"></textarea>
-                        </div>
-                        <button class="cta-btn pixel-corners">SEND MESSAGE</button>
+                        <!-- Formspree-powered form -->
+                        <form action="https://formspree.io/f/mldbewzz" method="POST" id="contact-form">
+                            <div class="form-group">
+                                <label for="name" class="form-label">NAME:</label>
+                                <input type="text" name="name" id="name" class="form-input pixel-corners" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="form-label">EMAIL:</label>
+                                <input type="email" name="_replyto" id="email" class="form-input pixel-corners" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message" class="form-label">MESSAGE:</label>
+                                <textarea name="message" id="message" class="form-textarea pixel-corners" required></textarea>
+                            </div>
+                            <!-- Honeypot field to prevent spam -->
+                            <input type="text" name="_gotcha" style="display:none">
+                            <button type="submit" class="cta-btn pixel-corners">SEND MESSAGE</button>
+                            <div id="form-status" class="form-status" style="margin-top: 15px; display: none;"></div>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -830,6 +836,55 @@
             
             fadeElements.forEach(element => {
                 observer.observe(element);
+            });
+        }
+
+        //form handling
+        const contactForm = document.getElementById('contact-form');
+        const formStatus = document.getElementById('form-status');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                const formData = new FormData(contactForm);
+                const formAction = contactForm.getAttribute('action');
+            
+                // Show loading state
+                formStatus.textContent = "Sending message...";
+                formStatus.style.display = "block";
+                formStatus.style.color = "var(--text)";
+            
+                fetch(formAction, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Network response was not ok.');
+                })
+                .then(data => {
+                    // Success message
+                    formStatus.textContent = "Message sent successfully!";
+                    formStatus.style.color = "#27c93f";
+                    contactForm.reset();
+                
+                    // Hide success message after 3 seconds
+                    setTimeout(() => {
+                        formStatus.style.display = "none";
+                    }, 3000);
+                })
+                .catch(error => {
+                    // Error message
+                    formStatus.textContent = "Oops! There was a problem sending your message.";
+                    formStatus.style.color = "#ff5f56";
+                    console.error('Error:', error);
+                });
             });
         }
         
