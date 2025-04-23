@@ -546,6 +546,41 @@
                 text-shadow: 3px 3px 0 var(--primary);
             }
         }
+
+        /* Custom animated cursor */
+        .custom-cursor {
+            position: fixed;
+            width: 16px;
+            height: 16px;
+            background-color: transparent;
+            border: 2px solid var(--accent);
+            z-index: 9999;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .custom-cursor::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent);
+            transform: translate(-50%, -50%);
+            animation: pulse 1.5s infinite alternate;
+        }
+
+        .clickable {
+            cursor: none !important;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
         
         /* Scroll Animations */
         .fade-in {
@@ -580,6 +615,7 @@
     </style>
 </head>
 <body>
+    <div id="custom-cursor" class="custom-cursor"></div>
     <!-- Navigation -->
     <nav>
         <div class="logo">PORTFOLIO</div>
@@ -832,12 +868,50 @@
                 observer.observe(element);
             });
         }
+
+        // Custom cursor
+        function setupCustomCursor() {
+            const cursor = document.getElementById('custom-cursor');
+            
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+        
+            // Make the cursor larger when hovering over clickable elements
+            const clickableElements = document.querySelectorAll('a, button, .window, .project-card');
+            clickableElements.forEach(element => {
+                element.classList.add('clickable');
+                
+                element.addEventListener('mouseenter', () => {
+                    cursor.style.width = '24px';
+                    cursor.style.height = '24px';
+                    cursor.style.borderColor = 'var(--accent)';
+                });
+            
+                element.addEventListener('mouseleave', () => {
+                    cursor.style.width = '16px';
+                    cursor.style.height = '16px';
+                    cursor.style.borderColor = 'var(--accent)';
+                });
+            });
+        
+            // Add click animation
+            document.addEventListener('mousedown', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(0.8)';
+            });
+            
+            document.addEventListener('mouseup', () => {
+                cursor.style.transform = 'translate(-50%, -50%) scale(1)';
+            });
+        }
         
         // Initialize
         window.addEventListener('DOMContentLoaded', () => {
             createStars();
             parallax();
             scrollAnimations();
+            setupCustomCursor();
         });
     </script>
 </body>
