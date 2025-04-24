@@ -937,17 +937,20 @@
 .mode-toggle-wrapper {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  margin-right: 1rem;
-  z-index: 10;
   position: relative;
+  width: 260px;
 }
 
 .mode-label {
   font-family: 'Press Start 2P', cursive;
   font-size: 0.6rem;
   color: var(--text);
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.2;
+  width: 80px;
 }
 .menu-toggle {
     display: flex;
@@ -1004,8 +1007,14 @@
     .logo {
         font-size: 1rem;
     }
+
+    .mode-label {
+        font-size: 0.5rem;
+        width: 70px;
+    }
     
     .mode-toggle-wrapper {
+        width: 220px;
         transform: scale(0.75);
     }
     
@@ -1021,12 +1030,13 @@
     }
     
     .mode-toggle-wrapper {
+        width: 200px;
         transform: scale(0.7);
     }
     
     .mode-label {
-        font-size: 0.4rem;
-        max-width: 45px;
+        font-size: 0.45rem;
+        max-width: 60px;
     }
 }
     </style>
@@ -1207,7 +1217,7 @@
     </footer>
 
     <script>
-        
+
     function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     const burger = document.getElementById('menuToggle');
