@@ -63,7 +63,6 @@
         /* Navbar */
         nav {
             background-color: var(--primary);
-            padding: 1.5rem 2rem;
             padding: 1.5rem 2rem; /* increase vertical padding */
             height: auto;
             min-height: 70px; /* ensures enough height for the toggle */
@@ -84,19 +83,29 @@
         }
         
         .nav-links {
+            display: none;
+            flex-direction: column;
+            background-color: var(--primary);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            padding: 1rem;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .nav-links.show {
             display: flex;
-            gap: 2rem; /* space out nav links */
-            flex-wrap: wrap; /* allow wrapping if needed */
-            justify-content: center;
-            align-items: center;
         }
         
         .nav-links a {
             color: var(--text);
             text-decoration: none;
             font-size: 1.2rem;
-            position: relative;
-            transition: color 0.3s;
+            text-align: center;
+            padding: 0.8rem 0;
         }
         
         .nav-links a:hover {
@@ -784,14 +793,14 @@
   white-space: nowrap;
 }
 .menu-toggle {
-    display: none;
-  width: 24px;
-  height: 20px;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 200;
+    display: flex;
+    width: 24px;
+    height: 20px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 200;
 }
 
 .menu-toggle span {
@@ -831,35 +840,37 @@
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: none; /* hide by default */
-    flex-direction: column;
-    background-color: var(--primary);
-    position: absolute;
-    top: 100%;
-    right: 1rem;
-    padding: 1rem;
-    border: 2px solid var(--accent);
-    z-index: 100;
-    transition: all 0.3s ease-in-out;
-  }
+    nav {
+        padding: 1rem 1.5rem;
+    }
+    
+    .logo {
+        font-size: 1rem;
+    }
+    
+    .mode-toggle-wrapper {
+        transform: scale(0.75);
+    }
+    
+    /* Fix the top padding of content sections */
+    .hero, header {
+        padding-top: 100px;
+    }
+}
 
-  .nav-links.show {
-    display: flex;
-  }
-
-  .menu-toggle {
-    display: block;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: var(--text);
-    margin-left: 1rem;
-  }
-
-  .mode-toggle-wrapper {
-    transform: scale(0.85); /* shrink for mobile */
-    margin-top: 0.5rem;
-  }
+@media (max-width: 480px) {
+    .logo {
+        font-size: 0.9rem;
+    }
+    
+    .mode-toggle-wrapper {
+        transform: scale(0.7);
+    }
+    
+    .mode-label {
+        font-size: 0.4rem;
+        max-width: 45px;
+    }
 }
 
     </style>
@@ -869,10 +880,11 @@
     <nav>
         <div class="logo">PORTFOLIO</div>
         <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#projects">Projects</a>
+            <a href="index.html">Home</a>
+            <a href="index.html#about">About</a>
+            <a href="#index.htmlprojects">Projects</a>
             <a href="interactive.html">Interactive</a>
-            <a href="#contact">Contact</a>
+            <a href="index.html#contact">Contact</a>
         </div>
 
         <div class="mode-toggle-wrapper">
@@ -892,14 +904,12 @@
               </div>
             </div>
             <span class="mode-label">Normal Me Stuff</span>
-          </div>
-
-          <!-- Add inside your nav -->
-          <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+        </div>
+        <div class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
             <span></span>
-          </div>
+        </div>
     </nav>
     
     <!-- Hero Section -->
@@ -1100,7 +1110,14 @@
     const burger = document.getElementById('menuToggle');
     navLinks.classList.toggle('show');
     burger.classList.toggle('active');
-  }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    if (menuToggle) {
+        menuToggle.addEventListener('click', toggleMenu);
+    }
+});
 
       document.getElementById('modeToggle').addEventListener('change', function () {
     if (this.checked) {
