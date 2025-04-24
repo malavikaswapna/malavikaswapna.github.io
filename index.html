@@ -130,7 +130,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding-top: 100px;
+            padding-top: 60px;
         }
         
         .hero::before {
@@ -191,16 +191,15 @@
         
         h1 {
             font-family: 'Press Start 2P', cursive;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            line-height: 1.4;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
             text-shadow: 3px 3px 0 var(--primary);
             letter-spacing: 2px;
             animation: glitch 5s infinite;
         }
         
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.5rem;
             margin-bottom: 2rem;
             opacity: 0.8;
         }
@@ -575,7 +574,18 @@
         /* Responsive */
         @media (max-width: 768px) {
             h1 {
-                font-size: 1.8rem;
+                font-size: 1.5rem;
+                line-height: 1.4;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero {
+                padding-top: 100px;
+                height: 100vh;
+            }
+
+            .subtitle {
+                font-size: 1.2rem;
             }
             
             .nav-links {
@@ -607,7 +617,7 @@
                 font-size: 1rem;
                 margin-bottom: 0.5rem;
             }
-        }
+            }}
         
         /* Even smaller screens */
         @media (max-width: 480px) {
