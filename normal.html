@@ -230,22 +230,28 @@
     /* For smaller screens */
     @media (max-width: 768px) {
       header h1 {
-        font-size: 1.5rem; /* Smaller font on mobile */
-        padding: 1.8; /* Add some padding */
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        padding: 0 0.5rem;
     }
   
     /* Adjust the header padding to make room for the text */
     header {
-      padding-top: 7rem; 
+      padding-top: 90px; 
     }
 }
 
     /* For very small screens */
-@media (max-width: 480px) {
-  header h1 {
-    font-size: 1.2rem;
-  }
-}
+    @media (max-width: 480px) {
+        header {
+            padding-top: 100px;
+        }
+
+        header h1 {
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+    }
 
     section {
       padding: 2rem;
