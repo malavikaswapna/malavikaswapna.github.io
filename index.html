@@ -639,6 +639,7 @@
           display: flex;
           justify-content: center;
           position: relative;
+          transform: scale(0.9);
         }
 
 .toggle-input {
@@ -781,16 +782,18 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  margin-right: 1rem;
-  z-index: 10;
   position: relative;
+  width: 260px;
 }
 
 .mode-label {
   font-family: 'Press Start 2P', cursive;
   font-size: 0.6rem;
   color: var(--text);
-  white-space: nowrap;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.2;
+  width: 80px;
 }
 .menu-toggle {
     display: flex;
@@ -849,13 +852,18 @@
     }
     
     .mode-toggle-wrapper {
-        transform: scale(0.75);
+        width: 220px;
     }
     
     /* Fix the top padding of content sections */
     .hero, header {
         padding-top: 100px;
     }
+
+    .mode-label {
+    font-size: 0.5rem;
+    width: 70px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -864,12 +872,16 @@
     }
     
     .mode-toggle-wrapper {
-        transform: scale(0.7);
+        width: 200px;
     }
     
     .mode-label {
-        font-size: 0.4rem;
-        max-width: 45px;
+        font-size: 0.45rem;
+        width: 60px;
+    }
+
+    .toggle-container {
+    transform: scale(0.8);
     }
 }
 
@@ -904,7 +916,7 @@
               </div>
             </div>
             <span class="mode-label">Normal Me Stuff</span>
-        </div>
+          </div>
         <div class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
