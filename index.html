@@ -462,7 +462,7 @@
             position: absolute;
             top: 0;
             left: 0;
-            animation: progress 1.5s ease-out forwards;
+            width: 0;
         }
         
         @keyframes progress {
@@ -609,7 +609,7 @@
             .skill-name {
                 margin-right: 5px;
             }
-            
+
             .mode-toggle-wrapper {
                 max-width: 200px;
                 margin-right: 0;
@@ -901,6 +901,21 @@
 
 }
 
+/* Skills loading animation */
+@keyframes fillBar {
+  from { width: 0; }
+  to { width: var(--skill-percent); }
+}
+
+.skill-progress {
+  width: 0; /* Start with empty bars */
+  position: relative;
+}
+
+.skill-progress.animate {
+  animation: fillBar 1.5s forwards;
+}
+
     </style>
 </head>
 <body>
@@ -990,7 +1005,7 @@
                                 <span>90%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 90%"></div>
+                                <div class="skill-progress" data-percent="90%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
@@ -999,7 +1014,7 @@
                                 <span>85%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 85%"></div>
+                                <div class="skill-progress" data-percent="85%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
@@ -1008,7 +1023,7 @@
                                 <span>80%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 80%"></div>
+                                <div class="skill-progress" data-percent="80%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
@@ -1017,7 +1032,7 @@
                                 <span>75%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 75%"></div>
+                                <div class="skill-progress" data-percent="75%"></div>
                             </div>
                         </div>
                         <div class="skill-item">
@@ -1026,7 +1041,7 @@
                                 <span>70%</span>
                             </div>
                             <div class="skill-bar">
-                                <div class="skill-progress" style="width: 70%"></div>
+                                <div class="skill-progress" data-percent="70%"></div>
                             </div>
                         </div>
                     </div>
@@ -1133,6 +1148,43 @@
     </footer>
     
     <script>
+
+        // Add this to your existing script
+document.addEventListener('DOMContentLoaded', function() {
+  // Skills loading animation
+  const skillsWindow = document.querySelector('.window:has(.skills)');
+  
+  if (skillsWindow) {
+    // Set up the intersection observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // When the skills window is visible, trigger animation
+          setTimeout(() => {
+            const progressBars = entry.target.querySelectorAll('.skill-progress');
+            progressBars.forEach((bar, index) => {
+              // Get the percentage from the style or data attribute
+              const percent = bar.style.width || bar.getAttribute('data-percent');
+              bar.style.setProperty('--skill-percent', percent);
+              
+              // Animate with a slight delay between each bar
+              setTimeout(() => {
+                bar.classList.add('animate');
+              }, index * 300);
+            });
+          }, 500);
+          
+          // Only trigger once
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    
+    // Start observing the skills window
+    observer.observe(skillsWindow);
+  }
+});
+
         function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     const burger = document.getElementById('menuToggle');
