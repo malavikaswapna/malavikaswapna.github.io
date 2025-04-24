@@ -212,20 +212,40 @@
 
     header {
       text-align: center;
-      padding: 4rem 2rem;
+      padding: 6rem 1rem 2rem 1rem;
+      overflow: visible;
     }
 
     header h1 {
       font-family: 'Press Start 2P', cursive;
       font-size: 2rem;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      word-break: break-word;
+      hyphens: auto;
+      max-width: 100%;
     }
 
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.7;
+    /* For smaller screens */
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 1.5rem; /* Smaller font on mobile */
+        padding: 1.8; /* Add some padding */
     }
+  
+    /* Adjust the header padding to make room for the text */
+    header {
+      padding-top: 7rem; 
+    }
+}
+
+    /* For very small screens */
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 1.2rem;
+  }
+}
 
     section {
       padding: 2rem;
@@ -276,9 +296,95 @@
       padding: 2rem;
       background: var(--primary);
     }
+
+    /* Parallax scrolling styles for normal.html */
+.parallax-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.parallax-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.floating-emoji {
+  position: absolute;
+  font-size: 2.5rem;
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite;
+  filter: drop-shadow(0 0 5px rgba(255, 182, 193, 0.5));
+}
+
+/* Different animation delays for each emoji */
+.floating-emoji:nth-child(1) { animation-delay: 0s; }
+.floating-emoji:nth-child(2) { animation-delay: 1.2s; }
+.floating-emoji:nth-child(3) { animation-delay: 2.4s; }
+.floating-emoji:nth-child(4) { animation-delay: 3.6s; }
+.floating-emoji:nth-child(5) { animation-delay: 4.8s; }
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Additional styling for the cards to make them pop against the parallax bg */
+.card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 3px dashed var(--secondary);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(255, 105, 180, 0.2);
+}
+
+/* Scroll animations for normal.html */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s, transform 0.8s;
+}
+
+.fade-in.active {
+  opacity: 1;
+  transform: translateY(0);
+}
   </style>
 </head>
 <body>
+    <div class="parallax-container">
+        <div class="parallax-layer" data-speed="0.2">
+          <div class="floating-emoji" style="top: 15%; left: 10%;">🌸</div>
+          <div class="floating-emoji" style="top: 30%; left: 85%;">✨</div>
+          <div class="floating-emoji" style="top: 70%; left: 20%;">☕</div>
+          <div class="floating-emoji" style="top: 60%; left: 80%;">📚</div>
+          <div class="floating-emoji" style="top: 85%; left: 60%;">🎨</div>
+        </div>
+      </div>
   <nav>
     <div class="logo">ME MODE ✨</div>
     <div class="mode-toggle-wrapper">
@@ -307,33 +413,33 @@
   </header>
 
   <section>
-    <h2 class="section-title">Things I Love</h2>
+    <h2 class="section-title fade-in">Things I Love</h2>
 
-    <div class="card">
+    <div class="card fade-in">
       <h3><span class="emoji">📚</span>Reading Weird Sci-Fi</h3>
       <p>From classics like *Dune* to indie web novels — I love stories that twist reality and mess with time.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
       <h3><span class="emoji">☕</span>Trying Fancy Coffees</h3>
       <p>I lowkey dream of owning a little pixel-themed café someday... JavaScript, but also espresso shots.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
       <h3><span class="emoji">🎨</span>Pixel Art & Doodles</h3>
       <p>Creating retro-inspired avatars, tiny animations, and weird lil creatures to relax after coding sprints.</p>
     </div>
   </section>
 
   <section>
-    <h2 class="section-title">Daily Rituals</h2>
+    <h2 class="section-title fade-in">Daily Rituals</h2>
 
-    <div class="card">
+    <div class="card fade-in">
       <h3><span class="emoji">🌅</span>Morning Walks</h3>
       <p>Headphones in, lo-fi playing, and just me and the sunrise. It's like my daily brain bootloader.</p>
     </div>
 
-    <div class="card">
+    <div class="card fade-in">
       <h3><span class="emoji">📓</span>Journaling My Mood</h3>
       <p>I log my feelings with emojis and keywords — surprisingly therapeutic and super fun to look back on!</p>
     </div>
@@ -356,6 +462,51 @@
       const toggle = document.getElementById('modeToggle');
       if (toggle) toggle.checked = true;
     });
+
+    // Add this to your existing script section in normal.html
+window.addEventListener('DOMContentLoaded', () => {
+  const parallaxLayer = document.querySelector('.parallax-layer');
+  
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const speed = parseFloat(parallaxLayer.getAttribute('data-speed'));
+    
+    parallaxLayer.style.transform = `translateY(${scrollY * speed}px)`;
+  });
+  
+  // Make emojis randomly move horizontally too
+  const emojis = document.querySelectorAll('.floating-emoji');
+  emojis.forEach(emoji => {
+    // Random initial position adjustment for more variety
+    const randomX = (Math.random() - 0.5) * 20;
+    emoji.style.transform = `translateX(${randomX}px)`;
+  });
+});
+
+// Add this to your script section
+function scrollAnimations() {
+  const fadeElements = document.querySelectorAll('.fade-in');
+  
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  fadeElements.forEach(element => {
+    observer.observe(element);
+  });
+}
+
+// Initialize animations on page load
+window.addEventListener('DOMContentLoaded', () => {
+  // Your existing code here
+  
+  // Add the scroll animations
+  scrollAnimations();
+});
   </script>
 </body>
 </html>
