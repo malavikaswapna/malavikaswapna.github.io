@@ -64,13 +64,15 @@
         /* Navbar */
         nav {
             background-color: var(--primary);
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+padding: 1.5rem 2rem; /* increase vertical padding */
+  height: auto;
+  min-height: 70px; /* ensures enough height for the toggle */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
         }
         
         .logo {
@@ -452,6 +454,47 @@
             }
         }
 
+        /* Responsive toggle wrapper */
+@media (max-width: 768px) {
+  .mode-toggle-wrapper {
+    max-width: 200px;
+    margin-right: 0;
+  }
+  
+  .mode-label {
+    font-size: 0.5rem;
+    max-width: 60px;
+    text-align: center;
+    line-height: 1.2;
+  }
+  
+  .nav {
+    padding: 1.5rem 1rem;
+  }
+  
+  .logo {
+    font-size: 1rem;
+    max-width: 120px;
+  }
+}
+
+/* Even smaller screens */
+@media (max-width: 480px) {
+  .mode-toggle-wrapper {
+    max-width: 170px;
+  }
+  
+  .mode-label {
+    font-size: 0.4rem;
+    max-width: 45px;
+  }
+  
+  .logo {
+    font-size: 0.9rem;
+    max-width: 100px;
+  }
+}
+
         /* Avatar Generator Styles */
         .avatar-vertical-wrapper {
             max-width: 550px;
@@ -719,6 +762,244 @@
         .theme-orange .terminal_body {
             background: #994f15;
         }
+
+        /* toggle */
+        .toggle-container {
+          --knob-size: 1.75em;
+          display: flex;
+          justify-content: center;
+          position: relative;
+        }
+
+.toggle-input {
+  position: absolute;
+  z-index: 2;
+  bottom: 132.5%;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  transform-origin: 50% 4.75em;
+  width: var(--knob-size);
+  height: var(--knob-size);
+  opacity: 0;
+  /* fix em sizing */
+  font: inherit;
+  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
+  cursor: pointer;
+}
+
+.toggle-input:checked {
+  transform: rotate(25deg);
+}
+
+.toggle-handle-wrapper {
+  position: absolute;
+  z-index: 1;
+  bottom: -135%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 62.125%, transparent 50%);
+  mask-image: linear-gradient(to bottom, #000 62.125%, transparent 50%);
+  width: 200%;
+  overflow: hidden;
+}
+
+.toggle-handle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(-25deg);
+  transform-origin: bottom center;
+  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
+}
+
+.toggle-input:checked + .toggle-handle-wrapper > .toggle-handle {
+  transform: rotate(25deg);
+}
+
+.toggle-handle-knob {
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+  width: var(--knob-size);
+  height: var(--knob-size);
+  background-image: radial-gradient(farthest-corner at 70% 30%, #fedee2 4%, #d63534 12% 24%, #a81a1a 50% 65%, #d63534 75%);
+  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
+}
+
+.toggle-input:checked + .toggle-handle-wrapper .toggle-handle-knob {
+  transform: rotate(-90deg);
+}
+
+/* toggle handle knob hover inner shadow */
+.toggle-handle-knob::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 8px 2px rgb(255 255 255 / .4);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+@media (hover: hover) {
+  .toggle-input:hover + .toggle-handle-wrapper .toggle-handle-knob::after,
+  .toggle-input:focus-visible + .toggle-handle-wrapper .toggle-handle-knob::after {
+    opacity: 1;
+  }
+}
+
+.toggle-handle-bar-wrapper {
+  position: relative;
+  width: .5em;
+  height: 3em;
+}
+
+.toggle-handle-bar {
+  position: absolute;
+  top: calc(var(--knob-size) / 2 * -1);
+  left: 0;
+  width: 100%;
+  height: calc(100% + var(--knob-size) / 2);
+  background-image: linear-gradient(to right, #777475, #a4a4a4, #fff 45% 55%, #a4a4a4, #777475);
+  background-position-x: .06125em;
+  transition: background-position-x .24s cubic-bezier(.65, 1.35, .5, 1);
+  box-shadow: inset 0 1em .25em rgb(0 0 0 / .4);
+}
+
+.toggle-input:checked + .toggle-handle-wrapper .toggle-handle-bar {
+  background-position-x: -.06125em;
+}
+
+.toggle-base {
+  position: relative;
+  border-radius: 3.125em;
+  padding: .25em;
+  width: 3.5em;
+  height: 1.125em;
+  background-color: #fff;
+  background-image: linear-gradient(to bottom, #fff, #d7d7d7);
+  box-shadow: 0 -.25em .5em #fff, 0 .25em .5em #d7d7d7;
+}
+
+.toggle-base-inside {
+  position: relative;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #a6a6a6, #7d7d7d);
+  box-shadow: inset 0 .0625em rgb(255 255 255 / .2), inset 0 -.03125em rgb(255 255 255 / 1), inset 0 -.0625em .25em rgb(0 0 0 / .1);
+}
+
+/* toggle base inside active */
+.toggle-base-inside::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #5ab054, #438c3c);
+  box-shadow: inherit;
+  opacity: 0;
+  transition: opacity .24s cubic-bezier(.65, 1.35, .5, 1);
+}
+
+.toggle-input:checked ~ .toggle-base .toggle-base-inside::after {
+  opacity: 1;
+}
+.mode-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 1rem;
+  z-index: 10;
+  position: relative;
+}
+
+.mode-label {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+.menu-toggle {
+    display: none;
+  width: 24px;
+  height: 20px;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 200;
+}
+
+.menu-toggle span {
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--text);
+  transition: 0.4s ease;
+}
+
+.menu-toggle span:nth-child(1) {
+  top: 0;
+}
+
+.menu-toggle span:nth-child(2) {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.menu-toggle span:nth-child(3) {
+  bottom: 0;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg);
+  top: 50%;
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg);
+  bottom: auto;
+  top: 50%;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; /* hide by default */
+    flex-direction: column;
+    background-color: var(--primary);
+    position: absolute;
+    top: 100%;
+    right: 1rem;
+    padding: 1rem;
+    border: 2px solid var(--accent);
+    z-index: 100;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: var(--text);
+    margin-left: 1rem;
+  }
+
+  .mode-toggle-wrapper {
+    transform: scale(0.85); /* shrink for mobile */
+    margin-top: 0.5rem;
+  }
+}
     </style>
 </head>
 <body>
@@ -732,6 +1013,30 @@
             <a href="#" class="active">Interactive</a>
             <a href="index.html#contact">Contact</a>
         </div>
+        <div class="mode-toggle-wrapper">
+            <span class="mode-label">Coding Stuff</span>
+            <div class="toggle-container" title="Switch Mode">
+              <input class="toggle-input" type="checkbox" id="modeToggle">
+              <div class="toggle-handle-wrapper">
+                <div class="toggle-handle">
+                  <div class="toggle-handle-knob"></div>
+                  <div class="toggle-handle-bar-wrapper">
+                    <div class="toggle-handle-bar"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="toggle-base">
+                <div class="toggle-base-inside"></div>
+              </div>
+            </div>
+            <span class="mode-label">Normal Me Stuff</span>
+          </div>
+        
+          <div class="menu-toggle" id="menuToggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
     </nav>
     
     <!-- Hero Section -->
@@ -874,6 +1179,28 @@
     </footer>
 
     <script>
+        function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    const burger = document.getElementById('menuToggle');
+    navLinks.classList.toggle('show');
+    burger.classList.toggle('active');
+  }
+
+  // Handle toggle redirect
+  document.getElementById('modeToggle').addEventListener('change', function () {
+    if (this.checked) {
+      window.location.href = 'normal.html';
+    } else {
+      window.location.href = 'index.html';
+    }
+  });
+
+  // Auto-toggle checked if on the normal page
+  if (window.location.pathname.includes('normal.html')) {
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('modeToggle').checked = true;
+    });
+  }
         // Tab Functionality
         document.addEventListener('DOMContentLoaded', function() {
             const tabButtons = document.querySelectorAll('.tab-btn');
