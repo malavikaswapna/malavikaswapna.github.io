@@ -85,10 +85,10 @@
         
         .nav-links {
             display: flex;
-  gap: 2rem; /* space out nav links */
-  flex-wrap: wrap; /* allow wrapping if needed */
-  justify-content: center;
-  align-items: center;
+            gap: 2rem; /* space out nav links */
+            flex-wrap: wrap; /* allow wrapping if needed */
+            justify-content: center;
+            align-items: center;
         }
         
         .nav-links a {
@@ -130,7 +130,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
-            padding-top: 60px;
+            padding-top: 100px;
         }
         
         .hero::before {
@@ -191,15 +191,16 @@
         
         h1 {
             font-family: 'Press Start 2P', cursive;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
             text-shadow: 3px 3px 0 var(--primary);
             letter-spacing: 2px;
             animation: glitch 5s infinite;
         }
         
         .subtitle {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             margin-bottom: 2rem;
             opacity: 0.8;
         }
@@ -584,48 +585,46 @@
             .window {
                 width: 100%;
             }
+            
+            .mode-toggle-wrapper {
+                transform: scale(0.75);
+                margin-right: 0;
+            }
+            
+            .mode-label {
+                font-size: 0.5rem;
+                max-width: 60px;
+                text-align: center;
+                line-height: 1.2;
+            }
+            
+            .nav {
+                padding: 1rem;
+                flex-wrap: wrap;
+            }
+            
+            .logo {
+                font-size: 1rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+        
+        /* Even smaller screens */
+        @media (max-width: 480px) {
+        .mode-toggle-wrapper {
+            transform: scale(0.7);
         }
 
-        /* Responsive toggle wrapper */
-        @media (max-width: 768px) {
-          .mode-toggle-wrapper {
-            max-width: 200px;
-            margin-right: 0;
+        .mode-label {
+          font-size: 0.4rem;
+          max-width: 45px;
         }
-  
-  .mode-label {
-    font-size: 0.5rem;
-    max-width: 60px;
-    text-align: center;
-    line-height: 1.2;
-  }
-  
-  .nav {
-    padding: 1.5rem 1rem;
-  }
-  
-  .logo {
-    font-size: 1rem;
-    max-width: 120px;
-  }
-}
-
-/* Even smaller screens */
-@media (max-width: 480px) {
-  .mode-toggle-wrapper {
-    max-width: 170px;
-  }
-  
-  .mode-label {
-    font-size: 0.4rem;
-    max-width: 45px;
-  }
-  
-  .logo {
-    font-size: 0.9rem;
-    max-width: 100px;
-  }
-}
+        
+        .logo {
+          font-size: 0.9rem;
+          max-width: 100px;
+        }
+    }
 
         /* toggle */
         .toggle-container {
