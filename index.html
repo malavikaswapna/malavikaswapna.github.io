@@ -72,6 +72,7 @@
             position: fixed;
             width: 100%;
             z-index: 100;
+            padding: 1.5rem 2rem;
         }
         
         .logo {
@@ -80,6 +81,8 @@
             letter-spacing: 1px;
             color: var(--accent);
             text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            flex: 1;
+            text-align: left;
         }
         
         .nav-links {
@@ -798,8 +801,12 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  position: relative;
-  width: 260px;
+  position: absolute;
+  width: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  z-index: 10;
 }
 
 .mode-label {
@@ -812,22 +819,24 @@
   width: 80px;
 }
 .menu-toggle {
-    display: flex;
-    width: 24px;
-    height: 20px;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 200;
+  position: relative;
+  width: 24px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20;
+  margin-left: auto;
+  overflow: visible;
 }
 
 .menu-toggle span {
   position: absolute;
-  width: 100%;
+  width: 100%; /* 100% of the 24px width */
   height: 3px;
   background-color: var(--text);
   transition: 0.4s ease;
+  right: 0;
 }
 
 .menu-toggle span:nth-child(1) {
@@ -869,7 +878,7 @@
     
     .mode-toggle-wrapper {
         width: 220px;
-        transform: scale(0.75);
+        transform: translateX(-50%) scale(0.75);
     }
     
     /* Fix the top padding of content sections */
@@ -891,7 +900,7 @@
     
     .mode-toggle-wrapper {
         width: 200px;
-        transform: scale(0.7);
+        transform: translateX(-50%) scale(0.65);
     }
     
     .mode-label {
@@ -981,7 +990,7 @@
                 </div>
                 <div class="window-content">
                     <div class="about-text">
-                        <p>Hello! I'm a computer science graduate with a passion for creating beautiful, functional websites and applications.</p>
+                        <p>Hello! I'm Malavika, a computer science graduate with a passion for creating beautiful, functional websites and applications.</p>
                         <p>With skills in front-end and back-end development, I enjoy turning complex problems into simple, beautiful solutions. My goal is always to build products that are both visually appealing and user-friendly.</p>
                         <p>When I'm not coding, you can find me exploring new technologies, reading, or working on creative coding projects.</p>
                     </div>
