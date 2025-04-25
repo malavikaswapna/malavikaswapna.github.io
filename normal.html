@@ -264,11 +264,61 @@
     }
 }
 
+@media (max-width: 767px) {
+  .mode-toggle-wrapper {
+    position: absolute;
+    top: 70px; /* Below navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 15px;
+    border-radius: 20px;
+    z-index: 90;
+    width: auto;
+    max-width: 280px;
+    background-color: var(--primary);
+    border: 2px solid var(--accent);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  }
+
+    /* For normal.html, use this instead */
+    .normal-page:root {
+    --primary-rgb: 255, 182, 193; /* RGB version of #ffb6c1 */
+  }
+
+  .mode-label {
+    font-size: 0.55rem;
+    line-height: 1.2;
+    text-align: center;
+    width: 80px;
+    white-space: normal; /* Enable text wrapping */
+    display: inline-block; /* Ensure block behavior */
+    overflow: visible; /* Prevent text cutoff */
+    padding: 0 5px;
+
+  }
+
+  .mode-label::after {
+    content: "\A"; /* Force a line break */
+    white-space: pre; /* Preserve the line break */
+  }
+  
+  .toggle-container {
+    transform: scale(0.85);
+    margin: 0 10px;
+  }
+}
+
+.normal-page .mode-toggle-wrapper {
+  background-color: white; /* White background for normal page */
+  border-color: var(--accent);
+}
+
     /* For very small screens */
     @media (max-width: 480px) {
       .mode-toggle-wrapper {
         width: 200px;
-        transform: translateX(-50%) scale(0.65);
+        op: 65px;
+        transform: translateX(-50%) scale(0.9);
     }
     .mode-label {
         font-size: 0.45rem;
