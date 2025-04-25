@@ -270,14 +270,17 @@
     top: 70px; /* Below navbar */
     left: 50%;
     transform: translateX(-50%);
-    padding: 8px 15px;
+    padding: 8px 10px;
     border-radius: 20px;
     z-index: 90;
-    width: auto;
+    width: 280px;
     max-width: 280px;
     background-color: var(--primary);
     border: 2px solid var(--accent);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
     /* For normal.html, use this instead */
@@ -286,14 +289,15 @@
   }
 
   .mode-label {
-    font-size: 0.55rem;
+    font-size: 0.5rem;
+    width: 75px;
     line-height: 1.2;
     text-align: center;
     width: 80px;
     white-space: normal; /* Enable text wrapping */
-    display: inline-block; /* Ensure block behavior */
+    display: block; /* Ensure block behavior */
     overflow: visible; /* Prevent text cutoff */
-    padding: 0 5px;
+    padding: 0;
 
   }
 
@@ -303,8 +307,8 @@
   }
   
   .toggle-container {
-    transform: scale(0.85);
-    margin: 0 10px;
+    transform: scale(0.8);
+    margin: 0 5px;
   }
 }
 
@@ -316,9 +320,9 @@
     /* For very small screens */
     @media (max-width: 480px) {
       .mode-toggle-wrapper {
-        width: 200px;
+        width: 250px;
         op: 65px;
-        transform: translateX(-50%) scale(0.9);
+        transform: translateX(-50%) scale(0.95);
     }
     .mode-label {
         font-size: 0.45rem;
