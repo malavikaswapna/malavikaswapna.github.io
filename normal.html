@@ -295,15 +295,10 @@
     overflow: visible; /* Prevent text cutoff */
     padding: 0 5px;
   }
-
-  .mode-label::after {
-    content: "\A"; /* Force a line break */
-    white-space: pre; /* Preserve the line break */
-  }
   
   .toggle-container {
-    transform: scale(0.85);
-    margin: 0 10px;
+    transform: scale(0.8);
+    margin: 0 5px;
   }
 }
 
@@ -316,12 +311,11 @@
     @media (max-width: 480px) {
       .mode-toggle-wrapper {
         width: 200px;
-        top: 65px;
-        transform: translateX(-50%) scale(0.9);
+        transform: translateX(-50%) scale(0.95);
     }
     .mode-label {
         font-size: 0.45rem;
-        width: 60px;
+        max-width: 70px;
     }
   
     .toggle-container {
