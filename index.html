@@ -991,9 +991,240 @@
     opacity: 1;
 }
 
+.windows-startup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.5s;
+}
+
+.startup-content {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.boot-screen {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.boot-container {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.xp-logo {
+  display: flex;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.xp-logo-container {
+  width: 300px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.xp-wordmark {
+  width: 100%;
+  height: auto;
+  margin-bottom: 80px;
+  filter: drop-shadow(0 0 5px rgba(0, 125, 255, 0.5));
+}
+
+.boot-progress-bar {
+  width: 260px;
+  height: 20px;
+  background-color: #111;
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #333;
+  box-shadow: 0 0 10px rgba(0, 40, 80, 0.5);
+}
+
+.progress-block {
+  width: 20%;
+  height: 100%;
+  background-color: #3b79c7;
+  position: absolute;
+  left: -20%;
+  animation: moveProgress 3s infinite ease-in-out;
+}
+
+.windows-flag {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.flag-red {
+  background-color: #F65314;
+}
+
+.flag-green {
+  background-color: #7CBB00;
+}
+
+.flag-blue {
+  background-color: #00A1F1;
+}
+
+.flag-yellow {
+  background-color: #FFBB00;
+}
+
+.text {
+  text-align: left;
+}
+
+.windows-text {
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  color: #fff;
+  font-size: 24px;
+}
+
+.xp-text {
+  font-style: italic;
+  margin-left: 2px;
+}
+
+.professional-text {
+  font-family: Arial, sans-serif;
+  color: #fff;
+  font-size: 16px;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 20px;
+  position: relative;
+  margin: 20px auto;
+}
+
+.loading-blocks {
+  display: flex;
+  gap: 2px;
+  height: 100%;
+  animation: moveBlocks 3s infinite;
+}
+
+.block {
+  width: 20px;
+  height: 100%;
+  background-color: #0065CB;
+  animation: pulse 1s infinite alternate;
+}
+
+.block:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.block:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes moveBlocks {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(160px); }
+}
+
+@keyframes pulse {
+  0% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+@keyframes moveProgress {
+  0% { left: -20%; }
+  100% { left: 100%; }
+}
+
+.interaction-message {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  font-size: 14px;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.copyright-text {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.interaction-message {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  font-size: 14px;
+}
+
+
     </style>
 </head>
 <body>
+    <div id="windows-startup" class="windows-startup">
+        <div class="startup-content">
+          <div class="boot-container">
+            <div class="xp-logo-container">
+              <img src="https://i.imgur.com/EF6eHiJ.png" alt="Windows XP" class="xp-wordmark">
+              <div class="boot-progress-bar">
+                <div class="progress-block"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     <!-- Navigation -->
     <nav>
         <div class="logo">PORTFOLIO</div>
@@ -1194,6 +1425,19 @@
                     <div class="project-links">
                         <a href="https://github.com/malavikaswapna/motion-ui.git" title="View Code"><i class="fas fa-code"></i></a>
                         <a href="https://harmonious-pixie-0615b4.netlify.app/" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card pixel-corners fade-in">
+                <div class="project-img">
+                    <img src="https://art.pixilart.com/sr2bfbcab7dffaws3.png" alt="Project 6">
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Developer's Fortune Teller</h3>
+                    <p class="project-desc">A mystical web application that reveals insights about your past, present, and future as a developer through interactive tarot-inspired card readings. Built with vanilla JavaScript and Firebase, this app features card selection animations, personalized interpretations based on card combinations, user authentication, reading history, and export options. The sophisticated interpretation engine analyzes relationships between cards to create a unique narrative for each user.</p>
+                    <div class="project-links">
+                        <a href="https://github.com/malavikaswapna/fortune-teller-web.git" title="View Code"><i class="fas fa-code"></i></a>
+                        <a href="https://malavikaswapna.github.io/fortune-teller-web/" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
                     </div>
                 </div>
             </div>
@@ -1418,6 +1662,99 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             });
         }
+
+// Replace your current Windows XP startup JavaScript with this code
+document.addEventListener('DOMContentLoaded', function() {
+  // Create audio element
+  const startupSound = document.createElement('audio');
+  
+  // Add source with the Vista startup sound
+  const mp3Source = document.createElement('source');
+  mp3Source.src = 'https://www.winhistory.de/more/winstart/mp3/vista.mp3';
+  mp3Source.type = 'audio/mp3';
+  
+  // Add source to audio element
+  startupSound.appendChild(mp3Source);
+  
+  // Set audio properties
+  startupSound.preload = 'auto';
+  startupSound.volume = 0.8; // Slightly lower volume since Vista sound is louder
+  
+  // Add to document body (helps with mobile devices)
+  document.body.appendChild(startupSound);
+  
+  const windowsStartup = document.getElementById('windows-startup');
+  
+  // Check if the user has visited before in this session
+  if (!sessionStorage.getItem('windowsStartupShown')) {
+    // Add message to let users know they need to interact
+    const interactionMessage = document.createElement('p');
+    interactionMessage.className = 'interaction-message';
+    interactionMessage.innerHTML = 'Click anywhere or press any key to start';
+    windowsStartup.querySelector('.startup-content').appendChild(interactionMessage);
+    
+    let hasInteracted = false;
+    
+    // Play startup sound when user interacts with the page
+    function playStartupSequence(event) {
+      // Prevent multiple calls
+      if (hasInteracted) return;
+      hasInteracted = true;
+      
+      // Play the sound
+      try {
+        // Try to play and handle any errors
+        const playPromise = startupSound.play();
+        
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.log('Audio playback error:', error);
+          });
+        }
+
+        console.log('Playing Windows startup sound');
+      } catch (e) {
+        console.log('Error playing sound:', e);
+      }
+      
+      // Hide the interaction message
+      if (interactionMessage) {
+        interactionMessage.style.display = 'none';
+      }
+      
+      // Remove the event listeners after first interaction
+      document.removeEventListener('click', playStartupSequence);
+      document.removeEventListener('keydown', playStartupSequence);
+      
+      // Hide the startup screen after animation completes
+      setTimeout(function() {
+        windowsStartup.classList.add('hidden');
+        // Set session storage to remember the startup was shown
+        sessionStorage.setItem('windowsStartupShown', 'true');
+
+        if (document.body.contains(startupSound)) {
+          document.body.removeChild(startupSound);
+        }
+      }, 4000);
+      
+      // Prevent default behavior for keyboard events
+      if (event.preventDefault) {
+        event.preventDefault();
+      }
+    }
+    
+    // Add event listeners for user interaction
+    document.addEventListener('click', playStartupSequence);
+    document.addEventListener('keydown', playStartupSequence);
+  } else {
+    // User has already seen the startup in this session, hide it immediately
+    windowsStartup.classList.add('hidden');
+
+    if (document.body.contains(startupSound)) {
+      document.body.removeChild(startupSound);
+    }
+  }
+});
         
         // Initialize
         window.addEventListener('DOMContentLoaded', () => {
