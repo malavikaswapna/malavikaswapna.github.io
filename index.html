@@ -1233,6 +1233,7 @@
             <a href="index.html#about">About</a>
             <a href="index.html#projects">Projects</a>
             <a href="interactive.html">Interactive</a>
+            <a href="data.html">Data Projects</a>
             <a href="index.html#contact">Contact</a>
         </div>
 
@@ -1663,95 +1664,117 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-// Replace your current Windows XP startup JavaScript with this code
+
+// Add this to your index.html script section
 document.addEventListener('DOMContentLoaded', function() {
-  // Create audio element
-  const startupSound = document.createElement('audio');
-  
-  // Add source with the Vista startup sound
-  const mp3Source = document.createElement('source');
-  mp3Source.src = 'https://www.winhistory.de/more/winstart/mp3/vista.mp3';
-  mp3Source.type = 'audio/mp3';
-  
-  // Add source to audio element
-  startupSound.appendChild(mp3Source);
-  
-  // Set audio properties
-  startupSound.preload = 'auto';
-  startupSound.volume = 0.8; // Slightly lower volume since Vista sound is louder
-  
-  // Add to document body (helps with mobile devices)
-  document.body.appendChild(startupSound);
+  // Check if we should skip the startup animation
+  const urlParams = new URLSearchParams(window.location.search);
+  const skipStartup = urlParams.get('skipStartup');
   
   const windowsStartup = document.getElementById('windows-startup');
   
-  // Check if the user has visited before in this session
-  if (!sessionStorage.getItem('windowsStartupShown')) {
-    // Add message to let users know they need to interact
-    const interactionMessage = document.createElement('p');
-    interactionMessage.className = 'interaction-message';
-    interactionMessage.innerHTML = 'Click anywhere or press any key to start';
-    windowsStartup.querySelector('.startup-content').appendChild(interactionMessage);
+  if (skipStartup === 'true') {
+    // Skip the startup animation if coming from another page via toggle
+    windowsStartup.classList.add('hidden');
     
-    let hasInteracted = false;
-    
-    // Play startup sound when user interacts with the page
-    function playStartupSequence(event) {
-      // Prevent multiple calls
-      if (hasInteracted) return;
-      hasInteracted = true;
-      
-      // Play the sound
-      try {
-        // Try to play and handle any errors
-        const playPromise = startupSound.play();
-        
-        if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            console.log('Audio playback error:', error);
-          });
-        }
-
-        console.log('Playing Windows startup sound');
-      } catch (e) {
-        console.log('Error playing sound:', e);
-      }
-      
-      // Hide the interaction message
-      if (interactionMessage) {
-        interactionMessage.style.display = 'none';
-      }
-      
-      // Remove the event listeners after first interaction
-      document.removeEventListener('click', playStartupSequence);
-      document.removeEventListener('keydown', playStartupSequence);
-      
-      // Hide the startup screen after animation completes
-      setTimeout(function() {
-        windowsStartup.classList.add('hidden');
-        // Set session storage to remember the startup was shown
-        sessionStorage.setItem('windowsStartupShown', 'true');
-
-        if (document.body.contains(startupSound)) {
-          document.body.removeChild(startupSound);
-        }
-      }, 4000);
-      
-      // Prevent default behavior for keyboard events
-      if (event.preventDefault) {
-        event.preventDefault();
-      }
+    // Also remove any startup audio that might be created
+    const startupSound = document.querySelector('audio');
+    if (startupSound) {
+      startupSound.remove();
     }
     
-    // Add event listeners for user interaction
-    document.addEventListener('click', playStartupSequence);
-    document.addEventListener('keydown', playStartupSequence);
+    // Set the session storage to remember the startup was shown
+    sessionStorage.setItem('windowsStartupShown', 'true');
+    
+    // Clean up the URL to remove the parameter
+    window.history.replaceState({}, document.title, window.location.pathname);
   } else {
-    // User has already seen the startup in this session, hide it immediately
-    windowsStartup.classList.add('hidden');
-
-    if (document.body.contains(startupSound)) {
-      document.body.removeChild(startupSound);
+    // Normal startup code (your existing code)
+    // Create audio element
+    const startupSound = document.createElement('audio');
+    
+    // Add source with the Vista startup sound
+    const mp3Source = document.createElement('source');
+    mp3Source.src = 'https://www.winhistory.de/more/winstart/mp3/vista.mp3';
+    mp3Source.type = 'audio/mp3';
+    
+    // Add source to audio element
+    startupSound.appendChild(mp3Source);
+    
+    // Set audio properties
+    startupSound.preload = 'auto';
+    startupSound.volume = 0.8; // Slightly lower volume since Vista sound is louder
+    
+    // Add to document body (helps with mobile devices)
+    document.body.appendChild(startupSound);
+    
+    // Check if the user has visited before in this session
+    if (!sessionStorage.getItem('windowsStartupShown')) {
+      // Add message to let users know they need to interact
+      const interactionMessage = document.createElement('p');
+      interactionMessage.className = 'interaction-message';
+      interactionMessage.innerHTML = 'Click anywhere or press any key to start';
+      windowsStartup.querySelector('.startup-content').appendChild(interactionMessage);
+      
+      let hasInteracted = false;
+      
+      // Play startup sound when user interacts with the page
+      function playStartupSequence(event) {
+        // Prevent multiple calls
+        if (hasInteracted) return;
+        hasInteracted = true;
+        
+        // Try to play the sound
+        try {
+          const playPromise = startupSound.play();
+          
+          if (playPromise !== undefined) {
+            playPromise.catch(error => {
+              console.log('Audio playback error:', error);
+            });
+          }
+          
+          console.log('Playing Windows startup sound');
+        } catch (e) {
+          console.log('Error playing sound:', e);
+        }
+        
+        // Hide the interaction message
+        if (interactionMessage) {
+          interactionMessage.style.display = 'none';
+        }
+        
+        // Remove the event listeners after first interaction
+        document.removeEventListener('click', playStartupSequence);
+        document.removeEventListener('keydown', playStartupSequence);
+        
+        // Hide the startup screen after animation completes
+        setTimeout(function() {
+          windowsStartup.classList.add('hidden');
+          // Set session storage to remember the startup was shown
+          sessionStorage.setItem('windowsStartupShown', 'true');
+          
+          if (document.body.contains(startupSound)) {
+            document.body.removeChild(startupSound);
+          }
+        }, 4000);
+        
+        // Prevent default behavior for keyboard events
+        if (event.preventDefault) {
+          event.preventDefault();
+        }
+      }
+      
+      // Add event listeners for user interaction
+      document.addEventListener('click', playStartupSequence);
+      document.addEventListener('keydown', playStartupSequence);
+    } else {
+      // User has already seen the startup in this session, hide it immediately
+      windowsStartup.classList.add('hidden');
+      
+      if (document.body.contains(startupSound)) {
+        document.body.removeChild(startupSound);
+      }
     }
   }
 });
