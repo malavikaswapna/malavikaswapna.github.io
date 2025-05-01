@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data, With Love | Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
+        
+        :root {
+            --primary: #4834d4;
+            --secondary: #686de0;
+            --accent: #eb4d4b;
+            --background: #130f40;
+            --window-bg: #30336b;
+            --text: #dff9fb;
+            --data-accent: #00c9a7;
+            --data-secondary: #1089ff;
+            --pixel-size: 2px;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: var(--background);
+            color: var(--text);
+            font-family: 'VT323', monospace;
+            font-size: 18px;
+            overflow-x: hidden;
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAiARJqtQZQAAARdJREFUOMulkzFOw0AQRd8YIhcUFCDFVVxwAKTUHCGRkHIFDpA6Ze7BASjTpIgQlQvEO0XsaL1Ze7W7/eTRzP55+/dqdQ9cAGMRAbDG+YyzrwJwCdwD48Dz3vl9YDE20fsb4BnYAvUZeAFUgTpQO5JK9N4DX8ALcAdURoBbYOO0TcYYBE6ZDtg6ztZ5nzmn+l8CB2DiLFJr+xazShPPEqfMYLvnUJyIXANPwLIoXv0i5Vj0tW5xziKwEpEKuBGRuR/EzM4bZxuPG0R3YuZ7V6GMNcCFc96YmenA/kxXYDMEqHDL1lQAz4NaOQlI8VuAxcDeJICUKwH9gACmfpC2bXczAFbrTG3bdgZ8hgCVP28BXgHMrKP/+JIFP99Udo9vJOUAAAAASUVORK5CYII=') 0 0, auto;
+        }
+        
+        a, button, .cta-btn, .nav-links a, .project-links a, .social-icons a, .window-controls .control {
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAigPsyY9+QAAAUhJREFUOMuVkzFuwkAQRd8aSqSOI0icIgWHoOQEkVLmCJFS5AApU+YeOUBK2iRFlCIFigWKd4pYaL3e9a53/eTRaP6892tmr78BJkAkIgDa2Z9z9k0AJsADEHme185vneep63oIfAJfQHHhrANyQAUoHUkleu+BH+Ab+ABWd8AnUDuta5uoRpf5QO2c1c7Z2jmvnVP9L8EH8OgsYmP8inOpmXO2cMoU5fAcihMRB3wBL2neAF9CuT/Gbd3qnGVgrSIZ8K4iwfZjFmPGgV2xb7BXkYJQUTZGRcIBkBWbA69AA9wAXG3fNxSogFlVVfF5DtI4EQlOAFL+CvgJvuJUgJQrAf0AAsbBYbfbHe4A8GbdYbfbHYDD9b9QfP1BKpDYvpsCNuFD6rru4EjUdX1wGzRUYH0pQArsgGPf9y0w/0/qp78UcAR+gfzSehLHXfQLx1mS5e7TkKIAAAAASUVORK5CYII=') 0 0, pointer;
+        }
+        
+        input, textarea {
+            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAiwMXWwfAwAAAOVJREFUOMvNkjEOgkAQRd8uaGMCIfEKHoDGK1BZegRiaeER7Kw9B0ewtLSWxgPgFZTENQG3WFiiQcSCvGSSmZ3/Z/4fVgAWQCgiAJrYT4l9EYA5sARmAXlH4h2AmAR28JsH8kCqQAyorImr0PsEpMCOcKeOACegcNoWxkSFa6qA2jlrnbN2zmvnVH8V4IDCWcTG+hXPpRbO2cpp01R358FaiMgUWANrv9x7YEv492PW1r3OWgaOKqLIvKkRkYXvpItJdsFREy4iAawAJSJFl2CSs2UPYAQkn8AHBgHS/wTm/e04AxI0ZNxg1cjsAAAAAElFTkSuQmCC') 10 10, text;
+        }
+        
+        /* Pixel effect */
+        .pixel-corners {
+            clip-path: 
+                polygon(
+                    0px calc(100% - var(--pixel-size)),
+                    var(--pixel-size) calc(100% - var(--pixel-size)),
+                    var(--pixel-size) 100%,
+                    calc(100% - var(--pixel-size)) 100%,
+                    calc(100% - var(--pixel-size)) calc(100% - var(--pixel-size)),
+                    100% calc(100% - var(--pixel-size)),
+                    100% var(--pixel-size),
+                    calc(100% - var(--pixel-size)) var(--pixel-size),
+                    calc(100% - var(--pixel-size)) 0px,
+                    var(--pixel-size) 0px,
+                    var(--pixel-size) var(--pixel-size),
+                    0px var(--pixel-size)
+                );
+        }
+        
+        /* Navbar */
+        nav {
+            background-color: var(--primary);
+            padding: 1.5rem 2rem;
+            height: auto;
+            min-height: 70px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+        }
+        
+        .logo {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--accent);
+            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+            flex: 1;
+            text-align: left;
+        }
+        
+        .nav-links {
+            display: none;
+            flex-direction: column;
+            background-color: var(--primary);
+            position: absolute;
+            top: 100%;
+            right: 0;
+            left: 0;
+            padding: 1rem;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            z-index: 1000;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .nav-links.show {
+            display: flex;
+        }
+        
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.2rem;
+            text-align: center;
+            padding: 0.8rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s;
+        }
+        
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 60px;
+            background-color: var(--background);
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                transparent,
+                transparent 2px,
+                rgba(255, 255, 255, 0.03) 2px,
+                rgba(255, 255, 255, 0.03) 4px
+            );
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .hero-content {
+            text-align: center;
+            z-index: 2;
+        }
+        
+        .data-patterns {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-image: 
+                radial-gradient(circle, rgba(0, 201, 167, 0.1) 1px, transparent 1px),
+                radial-gradient(circle, rgba(16, 137, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px, 30px 30px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.6;
+        }
+        
+        .data-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0, 201, 167, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(16, 137, 255, 0.05) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.4;
+        }
+        
+        .data-particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: var(--data-accent);
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: float 15s infinite linear;
+        }
+        
+        .particle:nth-child(2n) {
+            background-color: var(--data-secondary);
+            width: 4px;
+            height: 4px;
+            animation-duration: 20s;
+        }
+        
+        .particle:nth-child(3n) {
+            background-color: var(--accent);
+            width: 3px;
+            height: 3px;
+            animation-duration: 25s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+            }
+        }
+        
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 0 var(--primary);
+            letter-spacing: 2px;
+            color: var(--data-accent);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+        }
+        
+        .cta-btn {
+            background-color: var(--data-accent);
+            color: white;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-5px);
+        }
+        
+        .cta-btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .cta-btn:hover::after {
+            left: 100%;
+        }
+        
+        /* Section styles */
+        section {
+            padding: 5rem 2rem;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 2rem;
+            color: var(--data-accent);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 4px;
+            background-color: var(--data-accent);
+            margin-top: 10px;
+        }
+        
+        /* Data Projects Section */
+        .data-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .data-card {
+            background-color: var(--window-bg);
+            border: 4px solid var(--data-accent);
+            position: relative;
+            transition: transform 0.3s;
+            overflow: hidden;
+        }
+        
+        .data-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .data-img {
+            width: 100%;
+            height: 200px;
+            background-color: #1e1853;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .data-img img {
+            max-width: 100%;
+            transition: transform 0.5s;
+        }
+        
+        .data-card:hover .data-img img {
+            transform: scale(1.1);
+        }
+        
+        .data-content {
+            padding: 1.5rem;
+        }
+        
+        .data-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--data-accent);
+        }
+        
+        .data-desc {
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background-color: rgba(0, 201, 167, 0.2);
+            border: 1px solid var(--data-accent);
+            font-size: 0.8rem;
+            padding: 0.3rem 0.6rem;
+            border-radius: 4px;
+        }
+        
+        .data-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .data-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .data-links a:hover {
+            color: var(--data-accent);
+        }
+        
+        /* Data Visualization Section */
+        .viz-container {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .viz-window {
+            background-color: var(--window-bg);
+            border: 4px solid var(--primary);
+            overflow: hidden;
+        }
+        
+        .window-header {
+            background-color: var(--primary);
+            padding: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .window-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.9rem;
+            color: white;
+        }
+        
+        .window-controls {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .control {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+        
+        .control:nth-child(1) {
+            background-color: #ff5f56;
+        }
+        
+        .control:nth-child(2) {
+            background-color: #ffbd2e;
+        }
+        
+        .control:nth-child(3) {
+            background-color: #27c93f;
+        }
+        
+        .window-content {
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .window-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255, 255, 255, 0.05) 10px,
+                rgba(255, 255, 255, 0.05) 20px
+            );
+            pointer-events: none;
+        }
+        
+        /* Skills Section */
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .skill-category {
+            margin-bottom: 3rem;
+        }
+        
+        .category-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: var(--data-secondary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .skill-item {
+            background-color: rgba(16, 137, 255, 0.1);
+            border: 2px solid var(--data-secondary);
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+        
+        .skill-item:hover {
+            transform: translateY(-5px);
+            background-color: rgba(16, 137, 255, 0.2);
+        }
+        
+        .skill-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            color: var(--data-accent);
+        }
+        
+        .skill-name {
+            font-size: 1.1rem;
+        }
+        
+        /* Process Section */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 24px;
+            width: 4px;
+            background-color: var(--data-secondary);
+            z-index: 0;
+        }
+        
+        .process-step {
+            display: flex;
+            gap: 2rem;
+            position: relative;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--data-accent);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.2rem;
+            color: white;
+            z-index: 1;
+        }
+        
+        .step-content {
+            flex: 1;
+            background-color: var(--window-bg);
+            padding: 1.5rem;
+            border-left: 4px solid var(--data-accent);
+        }
+        
+        .step-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.1rem;
+            color: var(--data-accent);
+            margin-bottom: 1rem;
+        }
+        
+        .step-desc {
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .social-icons a {
+            color: var(--text);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            color: var(--data-accent);
+        }
+        
+        .copyright {
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+        
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s, transform 0.8s;
+        }
+        
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .process-step {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .process-steps::before {
+                left: 25px;
+            }
+            
+            .hero {
+                height: 50vh;
+                padding-top: 100px;
+            }
+
+            .mode-toggle-wrapper {
+                position: absolute;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                padding: 8px 15px;
+                border-radius: 20px;
+                background-color: rgba(72, 52, 212, 0.7);
+                border: 2px solid var(--accent);
+                box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        /* Menu toggle for mobile */
+        .menu-toggle {
+            position: relative;
+            width: 24px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20;
+            margin-left: auto;
+            overflow: visible;
+        }
+
+        .menu-toggle span {
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background-color: var(--text);
+            transition: 0.4s ease;
+            right: 0;
+        }
+
+        .menu-toggle span:nth-child(1) {
+            top: 0;
+        }
+
+        .menu-toggle span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .menu-toggle span:nth-child(3) {
+            bottom: 0;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg);
+            top: 50%;
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg);
+            bottom: auto;
+            top: 50%;
+        }
+
+        /* Chart containers */
+        .chart-container {
+            height: 400px;
+            width: 100%;
+            margin-bottom: 1.5rem;
+            background-color: rgba(48, 51, 107, 0.3);
+            border: 1px solid var(--data-accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chart-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .chart-icon {
+            font-size: 3rem;
+            color: var(--data-accent);
+            margin-bottom: 1rem;
+        }
+
+        .chart-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1rem;
+            margin-bottom: 0.8rem;
+            color: var(--data-accent);
+        }
+
+        .chart-desc {
+            max-width: 80%;
+            margin: 0 auto;
+        }
+
+        /* Mode toggle wrapper styles */
+.mode-toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: absolute;
+  width: auto;
+  left: 50%;
+  transform: translateX(-50%);
+  justify-content: center;
+  z-index: 10;
+}
+
+.mode-label {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.6rem;
+  color: var(--text);
+  white-space: normal;
+  text-align: center;
+  line-height: 1.2;
+  width: 80px;
+}
+
+/* Additional styles for the toggle switch */
+.toggle-container {
+  --knob-size: 1.75em;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  transform: scale(0.9);
+}
+
+.toggle-input {
+  position: absolute;
+  z-index: 2;
+  bottom: 132.5%;
+  border-radius: 50%;
+  transform: rotate(-25deg);
+  transform-origin: 50% 4.75em;
+  width: var(--knob-size);
+  height: var(--knob-size);
+  opacity: 0;
+  font: inherit;
+  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
+  cursor: pointer;
+}
+
+.toggle-input:checked {
+  transform: rotate(25deg);
+}
+
+.toggle-handle-wrapper {
+  position: absolute;
+  z-index: 1;
+  bottom: -135%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 62.125%, transparent 50%);
+  mask-image: linear-gradient(to bottom, #000 62.125%, transparent 50%);
+  width: 200%;
+  overflow: hidden;
+}
+
+.toggle-handle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(-25deg);
+  transform-origin: bottom center;
+  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
+}
+
+.toggle-input:checked + .toggle-handle-wrapper > .toggle-handle {
+  transform: rotate(25deg);
+}
+
+.toggle-handle-knob {
+  position: relative;
+  z-index: 1;
+  border-radius: 50%;
+  width: var(--knob-size);
+  height: var(--knob-size);
+  background-image: radial-gradient(farthest-corner at 70% 30%, #fedee2 4%, #d63534 12% 24%, #a81a1a 50% 65%, #d63534 75%);
+  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
+}
+
+.toggle-input:checked + .toggle-handle-wrapper .toggle-handle-knob {
+  transform: rotate(-90deg);
+}
+
+/* toggle handle knob hover inner shadow */
+.toggle-handle-knob::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  box-shadow: inset 0 0 8px 2px rgb(255 255 255 / .4);
+  opacity: 0;
+  transition: opacity .2s;
+}
+
+@media (hover: hover) {
+  .toggle-input:hover + .toggle-handle-wrapper .toggle-handle-knob::after,
+  .toggle-input:focus-visible + .toggle-handle-wrapper .toggle-handle-knob::after {
+    opacity: 1;
+  }
+}
+
+.toggle-handle-bar-wrapper {
+  position: relative;
+  width: .5em;
+  height: 3em;
+}
+
+.toggle-handle-bar {
+  position: absolute;
+  top: calc(var(--knob-size) / 2 * -1);
+  left: 0;
+  width: 100%;
+  height: calc(100% + var(--knob-size) / 2);
+  background-image: linear-gradient(to right, #777475, #a4a4a4, #fff 45% 55%, #a4a4a4, #777475);
+  background-position-x: .06125em;
+  transition: background-position-x .24s cubic-bezier(.65, 1.35, .5, 1);
+  box-shadow: inset 0 1em .25em rgb(0 0 0 / .4);
+}
+
+.toggle-input:checked + .toggle-handle-wrapper .toggle-handle-bar {
+  background-position-x: -.06125em;
+}
+
+.toggle-base {
+  position: relative;
+  border-radius: 3.125em;
+  padding: .25em;
+  width: 3.5em;
+  height: 1.125em;
+  background-color: #fff;
+  background-image: linear-gradient(to bottom, #fff, #d7d7d7);
+  box-shadow: 0 -.25em .5em #fff, 0 .25em .5em #d7d7d7;
+}
+
+.toggle-base-inside {
+  position: relative;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #a6a6a6, #7d7d7d);
+  box-shadow: inset 0 .0625em rgb(255 255 255 / .2), inset 0 -.03125em rgb(255 255 255 / 1), inset 0 -.0625em .25em rgb(0 0 0 / .1);
+}
+
+/* toggle base inside active */
+.toggle-base-inside::after {
+  content: '';
+  position: absolute;
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(to bottom, #5ab054, #438c3c);
+  box-shadow: inherit;
+  opacity: 0;
+  transition: opacity .24s cubic-bezier(.65, 1.35, .5, 1);
+}
+
+.toggle-input:checked ~ .toggle-base .toggle-base-inside::after {
+  opacity: 1;
+}
+
+/* Media queries for the toggle on different screen sizes */
+@media (max-width: 768px) {
+  .mode-toggle-wrapper {
+    max-width: 200px;
+    margin-right: 0;
+  }
+  
+  .mode-label {
+    font-size: 0.5rem;
+    max-width: 60px;
+    text-align: center;
+    line-height: 1.2;
+  }
+}
+
+@media (max-width: 767px) {
+  .mode-toggle-wrapper {
+    position: absolute;
+    top: 80px; /* Below navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px 15px;
+    border-radius: 20px;
+    z-index: 90;
+    width: auto;
+    max-width: 280px;
+    background-color: rgba(72, 52, 212, 0.7);
+    border: 2px solid var(--accent);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .mode-label {
+    font-size: 0.55rem;
+    line-height: 1.2;
+    text-align: center;
+    width: 80px;
+    white-space: normal; /* Enable text wrapping */
+    display: inline-block; /* Ensure block behavior */
+    overflow: visible; /* Prevent text cutoff */
+    padding: 0 5px;
+  }
+  
+  .toggle-container {
+    transform: scale(0.8);
+    margin: 0 5px;
+  }
+
+  /* Add space below the toggle for content */
+  .hero {
+    padding-top: 145px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .mode-toggle-wrapper {
+    width: 200px;
+    transform: translateX(-50%) scale(0.95);
+  }
+  
+  .mode-label {
+    font-size: 0.45rem;
+    max-width: 70px;
+  }
+}
+    </style>
+</head>
+<body>
+<!-- Navigation -->
+<nav>
+    <div class="logo">PORTFOLIO</div>
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="interactive.html">Interactive</a>
+        <a href="data.html">Data Projects</a>
+        <a href="index.html#contact">Contact</a>
+    </div>
+    <div class="mode-toggle-wrapper">
+        <span class="mode-label">Coding Stuff</span>
+        <div class="toggle-container" title="Switch Mode">
+            <input class="toggle-input" type="checkbox" id="modeToggle">
+            <div class="toggle-handle-wrapper">
+                <div class="toggle-handle">
+                    <div class="toggle-handle-knob"></div>
+                    <div class="toggle-handle-bar-wrapper">
+                        <div class="toggle-handle-bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="toggle-base">
+                <div class="toggle-base-inside"></div>
+            </div>
+        </div>
+        <span class="mode-label">Normal Me Stuff</span>
+    </div>
+    <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="data-patterns"></div>
+    <div class="data-grid"></div>
+    <div class="data-particles" id="particles"></div>
+    <div class="hero-content">
+        <h1>DATA, WITH LOVE</h1>
+        <p class="subtitle">Transforming numbers into narratives</p>
+        <a href="#data-projects" class="cta-btn pixel-corners">EXPLORE PROJECTS</a>
+    </div>
+</section>
+
+<!-- Data Projects Section -->
+<section id="data-projects">
+    <h2 class="section-title">DATA PROJECTS</h2>
+    <div class="data-container">
+        <div class="data-card pixel-corners fade-in">
+            <div class="data-img">
+                <img src="https://i.postimg.cc/PJqvSB9J/Screenshot-2025-05-01-at-2-21-22-pm.png" alt="COVID-19 Dashboard">
+            </div>
+            <div class="data-content">
+                <h3 class="data-title">COVID-19 Dashboard</h3>
+                <p class="data-desc">An interactive dashboard tracking global COVID-19 statistics with real-time updates. Features include heatmaps, trend analysis, and vaccination progress visualizations.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">D3.js</span>
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">API</span>
+                </div>
+                <div class="data-links">
+                    <a href="https://github.com/malavikaswapna/covid-dashboard" title="View Code"><i class="fas fa-code"></i></a>
+                    <a href="https://malavikaswapna.github.io/covid-dashboard/" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-card pixel-corners fade-in">
+            <div class="data-img">
+                <img src="https://art.pixilart.com/sr2db4d2e72ffaws3.png" alt="Spotify Listening Patterns">
+            </div>
+            <div class="data-content">
+                <h3 class="data-title">Spotify Listening Patterns</h3>
+                <p class="data-desc">Analyzes personal Spotify data to reveal listening habits, genre preferences, and mood patterns. Visualizes connections between artists and recommends new music based on listening history.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">Chart.js</span>
+                    <span class="tech-tag">Spotify API</span>
+                </div>
+                <div class="data-links">
+                    <a href="https://github.com/malavikaswapna/spotify-patterns" title="View Code"><i class="fas fa-code"></i></a>
+                    <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-card pixel-corners fade-in">
+            <div class="data-img">
+                <img src="https://art.pixilart.com/sr2ee5ab43a72aws3.png" alt="Urban Mobility Analysis">
+            </div>
+            <div class="data-content">
+                <h3 class="data-title">Urban Mobility Analysis</h3>
+                <p class="data-desc">Visual exploration of public transportation data across major cities. Identifies peak usage times, common routes, and compares efficiency across different systems using geospatial visualization.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">R</span>
+                    <span class="tech-tag">ggplot2</span>
+                    <span class="tech-tag">Leaflet</span>
+                    <span class="tech-tag">Shiny</span>
+                </div>
+                <div class="data-links">
+                    <a href="https://github.com/malavikaswapna/urban-mobility" title="View Code"><i class="fas fa-code"></i></a>
+                    <a href="#" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="data-card pixel-corners fade-in">
+            <div class="data-img">
+                <img src="https://art.pixilart.com/sr2fb345ad7b9aws3.png" alt="NLP Book Analyzer">
+            </div>
+            <div class="data-content">
+                <h3 class="data-title">NLP Book Analyzer</h3>
+                <p class="data-desc">Uses natural language processing to analyze classic literature. Extracts sentiment patterns, character relationships, and writing style metrics through text mining and visualization.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">NLTK</span>
+                    <span class="tech-tag">spaCy</span>
+                    <span class="tech-tag">Matplotlib</span>
+                </div>
+                <div class="data-links">
+                    <a href="https://github.com/malavikaswapna/nlp-book-analyzer" title="View Code"><i class="fas fa-code"></i></a>
+                    <a href="#" title="Research Paper"><i class="fas fa-file-alt"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-card pixel-corners fade-in">
+            <div class="data-img">
+                <img src="https://i.imgur.com/R6JujpD.png" alt="Real Estate Market Analysis">
+            </div>
+            <div class="data-content">
+                <h3 class="data-title">Real Estate Market Analysis</h3>
+                <p class="data-desc">Comprehensive real estate market analysis with price prediction model. Features interactive dashboard for visualizing market trends, investment opportunities, and neighborhood comparisons with machine learning-powered predictions.</p>
+                <div class="tech-tags">
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Pandas</span>
+                    <span class="tech-tag">React</span>
+                    <span class="tech-tag">Random Forest</span>
+                    <span class="tech-tag">Data Visualization</span>
+                </div>
+                <div class="data-links">
+                    <a href="https://github.com/malavikaswapna/real-estate-dashboard.git" title="View Code"><i class="fas fa-code"></i></a>
+                    <a href="https://real-estate-dashboard-bay.vercel.app/" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Data Visualization Section -->
+<section id="visualizations">
+    <h2 class="section-title">VISUALIZATIONS</h2>
+    <div class="viz-container">
+        <div class="viz-window pixel-corners fade-in">
+            <div class="window-header">
+                <div class="window-title">global_temperatures.viz</div>
+                <div class="window-controls">
+                    <div class="control"></div>
+                    <div class="control"></div>
+                    <div class="control"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <div class="chart-icon"><i class="fas fa-chart-line"></i></div>
+                        <h4 class="chart-title">Global Temperature Trends (1900-2023)</h4>
+                        <p class="chart-desc">Interactive time series visualization showing global temperature anomalies over the past century, with trend lines and comparison to pre-industrial levels.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="viz-window pixel-corners fade-in">
+            <div class="window-header">
+                <div class="window-title">social_network.viz</div>
+                <div class="window-controls">
+                    <div class="control"></div>
+                    <div class="control"></div>
+                    <div class="control"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <div class="chart-icon"><i class="fas fa-project-diagram"></i></div>
+                        <h4 class="chart-title">Social Media Network Analysis</h4>
+                        <p class="chart-desc">Force-directed graph visualization of connections between users in a social network, highlighting community clusters and influential nodes.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="viz-window pixel-corners fade-in">
+            <div class="window-header">
+                <div class="window-title">income_distribution.viz</div>
+                <div class="window-controls">
+                    <div class="control"></div>
+                    <div class="control"></div>
+                    <div class="control"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <div class="chart-icon"><i class="fas fa-chart-bar"></i></div>
+                        <h4 class="chart-title">Income Distribution by Region</h4>
+                        <p class="chart-desc">Interactive choropleth map with violin plots showing income distribution patterns across different geographic regions, with filters for demographic variables.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="viz-window pixel-corners fade-in">
+            <div class="window-header">
+                <div class="window-title">real_estate_dashboard.viz</div>
+                <div class="window-controls">
+                    <div class="control"></div>
+                    <div class="control"></div>
+                    <div class="control"></div>
+                </div>
+            </div>
+            <div class="window-content">
+                <div class="chart-container">
+                    <div class="chart-placeholder">
+                        <div class="chart-icon"><i class="fas fa-chart-area"></i></div>
+                        <h4 class="chart-title">Real Estate Price Prediction Model</h4>
+                        <p class="chart-desc">Interactive dashboard comparing property values across different cities with price predictions based on Random Forest model. Features neighborhood heatmaps, price trend analysis, and investment opportunity scoring.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="data-skills">
+    <h2 class="section-title">DATA TOOLKIT</h2>
+    <div class="skills-container">
+        <div class="skill-category fade-in">
+            <h3 class="category-title">LANGUAGES & LIBRARIES</h3>
+            <div class="skill-grid">
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fab fa-python"></i></div>
+                    <div class="skill-name">Python</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="skill-name">R</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fab fa-js-square"></i></div>
+                    <div class="skill-name">JavaScript</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-database"></i></div>
+                    <div class="skill-name">SQL</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-calculator"></i></div>
+                    <div class="skill-name">Pandas</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-brain"></i></div>
+                    <div class="skill-name">NumPy</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skill-category fade-in">
+            <h3 class="category-title">VISUALIZATION TOOLS</h3>
+            <div class="skill-grid">
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="skill-name">Matplotlib</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-chart-area"></i></div>
+                    <div class="skill-name">D3.js</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-palette"></i></div>
+                    <div class="skill-name">Seaborn</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-object-group"></i></div>
+                    <div class="skill-name">Tableau</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-chart-bar"></i></div>
+                    <div class="skill-name">ggplot2</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-desktop"></i></div>
+                    <div class="skill-name">PowerBI</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="skill-category fade-in">
+            <h3 class="category-title">ANALYSIS TECHNIQUES</h3>
+            <div class="skill-grid">
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                    <div class="skill-name">Machine Learning</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-language"></i></div>
+                    <div class="skill-name">NLP</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-project-diagram"></i></div>
+                    <div class="skill-name">Network Analysis</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-map-marked-alt"></i></div>
+                    <div class="skill-name">Geospatial</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-search"></i></div>
+                    <div class="skill-name">Exploratory Analysis</div>
+                </div>
+                <div class="skill-item pixel-corners">
+                    <div class="skill-icon"><i class="fas fa-chart-pie"></i></div>
+                    <div class="skill-name">Statistical Modeling</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section id="process">
+    <h2 class="section-title">DATA PROCESS</h2>
+    <div class="process-steps">
+        <div class="process-step fade-in">
+            <div class="step-number">1</div>
+            <div class="step-content pixel-corners">
+                <h3 class="step-title">DATA COLLECTION</h3>
+                <p class="step-desc">Gathering relevant data from various sources, including APIs, databases, web scraping, and public datasets. Ensuring comprehensive coverage while respecting privacy and ethical considerations.</p>
+            </div>
+        </div>
+        
+        <div class="process-step fade-in">
+            <div class="step-number">2</div>
+            <div class="step-content pixel-corners">
+                <h3 class="step-title">CLEANING & PREPARATION</h3>
+                <p class="step-desc">Transforming raw data into a usable format through cleaning, normalization, and feature engineering. Handling missing values, outliers, and formatting inconsistencies to ensure analysis integrity.</p>
+            </div>
+        </div>
+        
+        <div class="process-step fade-in">
+            <div class="step-number">3</div>
+            <div class="step-content pixel-corners">
+                <h3 class="step-title">EXPLORATORY ANALYSIS</h3>
+                <p class="step-desc">Investigating data to discover patterns, anomalies, and relationships. Using statistical methods and visualizations to formulate hypotheses and identify promising analytical directions.</p>
+            </div>
+        </div>
+        
+        <div class="process-step fade-in">
+            <div class="step-number">4</div>
+            <div class="step-content pixel-corners">
+                <h3 class="step-title">MODELING & ANALYSIS</h3>
+                <p class="step-desc">Applying appropriate statistical or machine learning models to extract insights and make predictions. Iteratively refining approaches based on performance metrics and validation results.</p>
+            </div>
+        </div>
+        
+        <div class="process-step fade-in">
+            <div class="step-number">5</div>
+            <div class="step-content pixel-corners">
+                <h3 class="step-title">VISUALIZATION & COMMUNICATION</h3>
+                <p class="step-desc">Translating complex findings into clear, compelling visuals and narratives. Designing interactive visualizations that allow users to explore data from multiple perspectives and understand key insights.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="social-icons">
+        <a href="https://github.com/malavikaswapna" target="_blank" title="GitHub Profile"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/malavika-swapana-321b92283" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+        <a href="#" target="_blank" title="Kaggle Profile"><i class="fab fa-kaggle"></i></a>
+        <a href="#" target="_blank" title="Tableau Public"><i class="fas fa-chart-bar"></i></a>
+    </div>
+    <p class="copyright">© 2025 | Created with <span style="color: var(--data-accent);">♥</span>, pixels, and data</p>
+</footer>
+
+<script>
+    document.getElementById('modeToggle').addEventListener('change', function () {
+  if (this.checked) {
+    window.location.href = 'normal.html';
+  } else {
+    window.location.href = 'index.html?skipStartup=true';
+  }
+});
+
+// Auto-check on "Normal Me Stuff" page
+if (window.location.pathname.includes('normal.html')) {
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('modeToggle').checked = true;
+  });
+}
+    
+
+    // Mobile menu toggle
+    function toggleMenu() {
+        const navLinks = document.querySelector('.nav-links');
+        const burger = document.getElementById('menuToggle');
+        navLinks.classList.toggle('show');
+        burger.classList.toggle('active');
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('menuToggle');
+        if (menuToggle) {
+            menuToggle.addEventListener('click', toggleMenu);
+        }
+    });
+    
+    // Create data particles
+    function createParticles() {
+        const particles = document.getElementById('particles');
+        if (!particles) return;
+        
+        const count = 50;
+        
+        for (let i = 0; i < count; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random positions
+            const x = Math.random() * 100;
+            const y = Math.random() * 100 + 100; // Start below the viewport
+            
+            // Random size
+            const size = Math.random() * 3 + 2;
+            
+            // Random animation delay
+            const delay = Math.random() * 15;
+            
+            particle.style.left = `${x}%`;
+            particle.style.top = `${y}%`;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.animationDelay = `${delay}s`;
+            
+            particles.appendChild(particle);
+        }
+    }
+    
+    // Scroll animations
+    function scrollAnimations() {
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        fadeElements.forEach(element => {
+            observer.observe(element);
+        });
+    }
+    
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+        createParticles();
+        scrollAnimations();
+    });
+</script>
+</body>
+</html>
