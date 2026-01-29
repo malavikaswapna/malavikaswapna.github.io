@@ -1,1790 +1,2132 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pixel Art Portfolio</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap');
-        
-        :root {
-            --primary: #4834d4;
-            --secondary: #686de0;
-            --accent: #eb4d4b;
-            --background: #130f40;
-            --window-bg: #30336b;
-            --text: #dff9fb;
-            --pixel-size: 2px;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            background-color: var(--background);
-            color: var(--text);
-            font-family: 'VT323', monospace;
-            font-size: 18px;
-            overflow-x: hidden;
-            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAiARJqtQZQAAARdJREFUOMulkzFOw0AQRd8YIhcUFCDFVVxwAKTUHCGRkHIFDpA6Ze7BASjTpIgQlQvEO0XsaL1Ze7W7/eTRzP55+/dqdQ9cAGMRAbDG+YyzrwJwCdwD48Dz3vl9YDE20fsb4BnYAvUZeAFUgTpQO5JK9N4DX8ALcAdURoBbYOO0TcYYBE6ZDtg6ztZ5nzmn+l8CB2DiLFJr+xazShPPEqfMYLvnUJyIXANPwLIoXv0i5Vj0tW5xziKwEpEKuBGRuR/EzM4bZxuPG0R3YuZ7V6GMNcCFc96YmenA/kxXYDMEqHDL1lQAz4NaOQlI8VuAxcDeJICUKwH9gACmfpC2bXczAFbrTG3bdgZ8hgCVP28BXgHMrKP/+JIFP99Udo9vJOUAAAAASUVORK5CYII=') 0 0, auto;
-        }
-        
-        a, button, .cta-btn, .nav-links a, .project-links a, .social-icons a, .window-controls .control {
-            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAigPsyY9+QAAAUhJREFUOMuVkzFuwkAQRd8aSqSOI0icIgWHoOQEkVLmCJFS5AApU+YeOUBK2iRFlCIFigWKd4pYaL3e9a53/eTRaP6892tmr78BJkAkIgDa2Z9z9k0AJsADEHme185vneep63oIfAJfQHHhrANyQAUoHUkleu+BH+Ab+ABWd8AnUDuta5uoRpf5QO2c1c7Z2jmvnVP9L8EH8OgsYmP8inOpmXO2cMoU5fAcihMRB3wBL2neAF9CuT/Gbd3qnGVgrSIZ8K4iwfZjFmPGgV2xb7BXkYJQUTZGRcIBkBWbA69AA9wAXG3fNxSogFlVVfF5DtI4EQlOAFL+CvgJvuJUgJQrAf0AAsbBYbfbHe4A8GbdYbfbHYDD9b9QfP1BKpDYvpsCNuFD6rru4EjUdX1wGzRUYH0pQArsgGPf9y0w/0/qp78UcAR+gfzSehLHXfQLx1mS5e7TkKIAAAAASUVORK5CYII=') 0 0, pointer;
-        }
-        
-        input, textarea {
-            cursor: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABmJLR0QA/wD/AP+gvaeTAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAAB3RJTUUH5gQXAiwMXWwfAwAAAOVJREFUOMvNkjEOgkAQRd8uaGMCIfEKHoDGK1BZegRiaeER7Kw9B0ewtLSWxgPgFZTENQG3WFiiQcSCvGSSmZ3/Z/4fVgAWQCgiAJrYT4l9EYA5sARmAXlH4h2AmAR28JsH8kCqQAyorImr0PsEpMCOcKeOACegcNoWxkSFa6qA2jlrnbN2zmvnVH8V4IDCWcTG+hXPpRbO2cpp01R358FaiMgUWANrv9x7YEv492PW1r3OWgaOKqLIvKkRkYXvpItJdsFREy4iAawAJSJFl2CSs2UPYAQkn8AHBgHS/wTm/e04AxI0ZNxg1cjsAAAAAElFTkSuQmCC') 10 10, text;
-        }
-        
-        /* Pixel effect */
-        .pixel-corners {
-            clip-path: 
-                polygon(
-                    0px calc(100% - var(--pixel-size)),
-                    var(--pixel-size) calc(100% - var(--pixel-size)),
-                    var(--pixel-size) 100%,
-                    calc(100% - var(--pixel-size)) 100%,
-                    calc(100% - var(--pixel-size)) calc(100% - var(--pixel-size)),
-                    100% calc(100% - var(--pixel-size)),
-                    100% var(--pixel-size),
-                    calc(100% - var(--pixel-size)) var(--pixel-size),
-                    calc(100% - var(--pixel-size)) 0px,
-                    var(--pixel-size) 0px,
-                    var(--pixel-size) var(--pixel-size),
-                    0px var(--pixel-size)
-                );
-        }
-        
-        /* Navbar */
-        nav {
-            background-color: var(--primary);
-            padding: 1.5rem 2rem; /* increase vertical padding */
-            height: auto;
-            min-height: 70px; /* ensures enough height for the toggle */
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            z-index: 100;
-            padding: 1.5rem 2rem;
-        }
-        
-        .logo {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.2rem;
-            letter-spacing: 1px;
-            color: var(--accent);
-            text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
-            flex: 1;
-            text-align: left;
-        }
-        
-        .nav-links {
-            display: none;
-            flex-direction: column;
-            background-color: var(--primary);
-            position: absolute;
-            top: 100%;
-            right: 0;
-            left: 0;
-            padding: 1rem;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
-            z-index: 1000;
-            border-bottom: 3px solid var(--accent);
-        }
+      @import url("https://fonts.googleapis.com/css2?family=VT323&family=Press+Start+2P&display=swap");
 
-        .nav-links.show {
-            display: flex;
-        }
-        
-        .nav-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 1.2rem;
-            text-align: center;
-            padding: 0.8rem 0;
-        }
-        
-        .nav-links a:hover {
-            color: var(--accent);
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s;
-        }
-        
-        .nav-links a:hover::after {
-            transform: scaleX(1);
-        }
+      :root {
+        --primary: #4834d4;
+        --secondary: #686de0;
+        --accent: #eb4d4b;
+        --background: #130f40;
+        --window-bg: #30336b;
+        --text: #dff9fb;
+        --pixel-size: 2px;
+      }
 
-        
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 60px;
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--background);
+        color: var(--text);
+        font-family: "VT323", monospace;
+        font-size: 18px;
+        overflow-x: hidden;
+      }
+
+      /* Pixel effect */
+      .pixel-corners {
+        clip-path: polygon(
+          0px calc(100% - var(--pixel-size)),
+          var(--pixel-size) calc(100% - var(--pixel-size)),
+          var(--pixel-size) 100%,
+          calc(100% - var(--pixel-size)) 100%,
+          calc(100% - var(--pixel-size)) calc(100% - var(--pixel-size)),
+          100% calc(100% - var(--pixel-size)),
+          100% var(--pixel-size),
+          calc(100% - var(--pixel-size)) var(--pixel-size),
+          calc(100% - var(--pixel-size)) 0px,
+          var(--pixel-size) 0px,
+          var(--pixel-size) var(--pixel-size),
+          0px var(--pixel-size)
+        );
+      }
+
+      /* Navbar */
+      nav {
+        background-color: var(--primary);
+        padding: 1.5rem 2rem; /* increase vertical padding */
+        height: auto;
+        min-height: 70px; /* ensures enough height for the toggle */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        width: 100%;
+        z-index: 100;
+        padding: 1.5rem 2rem;
+      }
+
+      .logo {
+        font-family: "Press Start 2P", cursive;
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        color: var(--accent);
+        text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+        flex: 1;
+        text-align: left;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        background-color: var(--primary);
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        padding: 1rem;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        border-bottom: 3px solid var(--accent);
+      }
+
+      .nav-links.show {
+        display: flex;
+      }
+
+      .nav-links a {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 1.2rem;
+        text-align: center;
+        padding: 0.8rem 0;
+      }
+
+      .nav-links a:hover {
+        color: var(--accent);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        bottom: -5px;
+        left: 0;
+        background-color: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s;
+      }
+
+      .nav-links a:hover::after {
+        transform: scaleX(1);
+      }
+
+      /* Hero Section */
+      .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding-top: 60px;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent,
+          transparent 2px,
+          rgba(255, 255, 255, 0.03) 2px,
+          rgba(255, 255, 255, 0.03) 4px
+        );
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .hero-content {
+        text-align: center;
+        z-index: 2;
+      }
+
+      .pixel-art {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="10" height="10" fill="%234834d4" opacity="0.1"/><rect x="10" y="10" width="10" height="10" fill="%234834d4" opacity="0.1"/></svg>');
+        background-repeat: repeat;
+        opacity: 0.8;
+      }
+
+      .parallax-stars {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: translateZ(-1px) scale(2);
+        z-index: 0;
+      }
+
+      .star {
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        animation: twinkle 2s infinite alternate;
+      }
+
+      @keyframes twinkle {
+        0% {
+          opacity: 0.3;
         }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                to bottom,
-                transparent,
-                transparent 2px,
-                rgba(255, 255, 255, 0.03) 2px,
-                rgba(255, 255, 255, 0.03) 4px
-            );
-            pointer-events: none;
-            z-index: 1;
+        100% {
+          opacity: 1;
         }
-        
-        .hero-content {
-            text-align: center;
-            z-index: 2;
+      }
+
+      h1 {
+        font-family: "Press Start 2P", cursive;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 3px 3px 0 var(--primary);
+        letter-spacing: 2px;
+        animation: glitch 5s infinite;
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+        opacity: 0.8;
+      }
+
+      .cta-btn {
+        background-color: var(--accent);
+        color: white;
+        font-family: "Press Start 2P", cursive;
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+        border: none;
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.2s;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-5px);
+      }
+
+      .cta-btn::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: 0.5s;
+      }
+
+      .cta-btn:hover::after {
+        left: 100%;
+      }
+
+      /* Section styles */
+      section {
+        padding: 5rem 2rem;
+      }
+
+      .section-title {
+        font-family: "Press Start 2P", cursive;
+        font-size: 2rem;
+        color: var(--accent);
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 4px;
+        background-color: var(--accent);
+        margin-top: 10px;
+      }
+
+      /* Windows Section for About */
+      .windows-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .window {
+        background-color: var(--window-bg);
+        width: 48%;
+        min-width: 300px;
+        border: 4px solid var(--primary);
+        transform-style: preserve-3d;
+        transition: transform 0.5s;
+        margin-bottom: 2rem;
+      }
+
+      .window:hover {
+        transform: translateZ(20px);
+      }
+
+      .window-header {
+        background-color: var(--primary);
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .window-title {
+        font-family: "Press Start 2P", cursive;
+        font-size: 0.9rem;
+        color: white;
+      }
+
+      .window-controls {
+        display: flex;
+        gap: 5px;
+      }
+
+      .control {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+      }
+
+      .control:nth-child(1) {
+        background-color: #ff5f56;
+      }
+
+      .control:nth-child(2) {
+        background-color: #ffbd2e;
+      }
+
+      .control:nth-child(3) {
+        background-color: #27c93f;
+      }
+
+      .window-content {
+        padding: 1.5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .window-content::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: repeating-linear-gradient(
+          45deg,
+          transparent,
+          transparent 10px,
+          rgba(255, 255, 255, 0.05) 10px,
+          rgba(255, 255, 255, 0.05) 20px
+        );
+        pointer-events: none;
+      }
+
+      /* Projects Section */
+      .projects-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .project-card {
+        background-color: var(--window-bg);
+        border: 4px solid var(--primary);
+        position: relative;
+        transition: transform 0.3s;
+        overflow: hidden;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+      }
+
+      .project-img {
+        width: 100%;
+        height: 200px;
+        background-color: var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+      }
+
+      .project-img img {
+        max-width: 100%;
+        transition: transform 0.5s;
+      }
+
+      .project-card:hover .project-img img {
+        transform: scale(1.1);
+      }
+
+      .project-content {
+        padding: 1.5rem;
+      }
+
+      .project-title {
+        font-family: "Press Start 2P", cursive;
+        font-size: 1.2rem;
+        margin-bottom: 1rem;
+        color: var(--accent);
+      }
+
+      .project-desc {
+        margin-bottom: 1.5rem;
+        line-height: 1.4;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .project-links a {
+        color: var(--text);
+        text-decoration: none;
+        font-size: 1.5rem;
+        transition: color 0.3s;
+      }
+
+      .project-links a:hover {
+        color: var(--accent);
+      }
+
+      /* About section */
+      .about-text {
+        flex: 1;
+        min-width: 300px;
+        line-height: 1.6;
+      }
+
+      .about-text p {
+        margin-bottom: 1rem;
+      }
+
+      .skills {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .skill-item {
+        margin-bottom: 1.5rem;
+      }
+
+      .skill-name {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+      }
+
+      .skill-bar {
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.1);
+        position: relative;
+      }
+
+      .skill-progress {
+        height: 100%;
+        background-color: var(--accent);
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+      }
+
+      @keyframes progress {
+        from {
+          width: 0;
         }
-        
-        .pixel-art {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><rect width="10" height="10" fill="%234834d4" opacity="0.1"/><rect x="10" y="10" width="10" height="10" fill="%234834d4" opacity="0.1"/></svg>');
-            background-repeat: repeat;
-            opacity: 0.8;
+      }
+
+      /* Contact */
+      .contact-container {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+      }
+
+      .contact-form {
+        width: 100%;
+      }
+
+      .form-group {
+        margin-bottom: 1.5rem;
+        text-align: left;
+      }
+
+      .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-family: "Press Start 2P", cursive;
+        font-size: 0.9rem;
+      }
+
+      .form-input,
+      .form-textarea {
+        width: 100%;
+        padding: 0.8rem;
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 2px solid var(--primary);
+        color: var(--text);
+        font-family: "VT323", monospace;
+        font-size: 1.2rem;
+        transition: border-color 0.3s;
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--accent);
+      }
+
+      .form-textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--primary);
+        padding: 2rem;
+        text-align: center;
+      }
+
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .social-icons a {
+        color: var(--text);
+        font-size: 1.5rem;
+        transition: color 0.3s;
+      }
+
+      .social-icons a:hover {
+        color: var(--accent);
+      }
+
+      .copyright {
+        font-size: 1rem;
+        opacity: 0.8;
+      }
+
+      /* Animation Keyframes */
+      @keyframes glitch {
+        0% {
+          text-shadow: 3px 3px 0 var(--primary);
         }
-        
-        .parallax-stars {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            transform: translateZ(-1px) scale(2);
-            z-index: 0;
+        2% {
+          text-shadow: -3px -3px 0 var(--accent);
         }
-        
-        .star {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            animation: twinkle 2s infinite alternate;
+        4% {
+          text-shadow: 3px 3px 0 var(--primary);
         }
-        
-        @keyframes twinkle {
-            0% { opacity: 0.3; }
-            100% { opacity: 1; }
+        50% {
+          text-shadow: 3px 3px 0 var(--primary);
         }
-        
+        52% {
+          text-shadow: -5px -1px 0 var(--accent);
+        }
+        54% {
+          text-shadow: 3px 3px 0 var(--primary);
+        }
+        100% {
+          text-shadow: 3px 3px 0 var(--primary);
+        }
+      }
+
+      /* Scroll Animations */
+      .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.8s, transform 0.8s;
+      }
+
+      .fade-in.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
         h1 {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 0 var(--primary);
-            letter-spacing: 2px;
-            animation: glitch 5s infinite;
+          font-size: 1.8rem;
         }
-        
-        .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.8;
+
+        .nav-links {
+          display: none;
         }
-        
-        .cta-btn {
-            background-color: var(--accent);
-            color: white;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1rem;
-            padding: 0.8rem 1.5rem;
-            border: none;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.2s;
-        }
-        
-        .cta-btn:hover {
-            transform: translateY(-5px);
-        }
-        
-        .cta-btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: 0.5s;
-        }
-        
-        .cta-btn:hover::after {
-            left: 100%;
-        }
-        
-        /* Section styles */
-        section {
-            padding: 5rem 2rem;
-        }
-        
-        .section-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 2rem;
-            color: var(--accent);
-            margin-bottom: 3rem;
-            text-align: center;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100%;
-            height: 4px;
-            background-color: var(--accent);
-            margin-top: 10px;
-        }
-        
-        /* Windows Section for About */
-        .windows-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
+
         .window {
-            background-color: var(--window-bg);
-            width: 48%;
-            min-width: 300px;
-            border: 4px solid var(--primary);
-            transform-style: preserve-3d;
-            transition: transform 0.5s;
-            margin-bottom: 2rem;
+          width: 100%;
         }
-        
-        .window:hover {
-            transform: translateZ(20px);
-        }
-        
-        .window-header {
-            background-color: var(--primary);
-            padding: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .window-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.9rem;
-            color: white;
-        }
-        
-        .window-controls {
-            display: flex;
-            gap: 5px;
-        }
-        
-        .control {
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-        }
-        
-        .control:nth-child(1) {
-            background-color: #ff5f56;
-        }
-        
-        .control:nth-child(2) {
-            background-color: #ffbd2e;
-        }
-        
-        .control:nth-child(3) {
-            background-color: #27c93f;
-        }
-        
-        .window-content {
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .window-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.05) 10px,
-                rgba(255, 255, 255, 0.05) 20px
-            );
-            pointer-events: none;
-        }
-        
-        /* Projects Section */
-        .projects-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .project-card {
-            background-color: var(--window-bg);
-            border: 4px solid var(--primary);
-            position: relative;
-            transition: transform 0.3s;
-            overflow: hidden;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .project-img {
-            width: 100%;
-            height: 200px;
-            background-color: var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-        
-        .project-img img {
-            max-width: 100%;
-            transition: transform 0.5s;
-        }
-        
-        .project-card:hover .project-img img {
-            transform: scale(1.1);
-        }
-        
-        .project-content {
-            padding: 1.5rem;
-        }
-        
-        .project-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: var(--accent);
-        }
-        
-        .project-desc {
-            margin-bottom: 1.5rem;
-            line-height: 1.4;
-        }
-        
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-        
-        .project-links a {
-            color: var(--text);
-            text-decoration: none;
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-        
-        .project-links a:hover {
-            color: var(--accent);
-        }
-        
-        /* About section */
-        .about-text {
-            flex: 1;
-            min-width: 300px;
-            line-height: 1.6;
-        }
-        
-        .about-text p {
-            margin-bottom: 1rem;
-        }
-        
-        .skills {
-            flex: 1;
-            min-width: 300px;
-        }
-        
-        .skill-item {
-            margin-bottom: 1.5rem;
-        }
-        
+
+        /* Give more space for the text and values */
         .skill-name {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
+          margin-right: 5px;
         }
-        
-        .skill-bar {
-            height: 10px;
-            background-color: rgba(255, 255, 255, 0.1);
-            position: relative;
-        }
-        
-        .skill-progress {
-            height: 100%;
-            background-color: var(--accent);
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-        }
-        
-        @keyframes progress {
-            from { width: 0; }
-        }
-        
-        /* Contact */
-        .contact-container {
-            max-width: 600px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .contact-form {
-            width: 100%;
-        }
-        
-        .form-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.9rem;
-        }
-        
-        .form-input, .form-textarea {
-            width: 100%;
-            padding: 0.8rem;
-            background-color: rgba(0, 0, 0, 0.2);
-            border: 2px solid var(--primary);
-            color: var(--text);
-            font-family: 'VT323', monospace;
-            font-size: 1.2rem;
-            transition: border-color 0.3s;
-        }
-        
-        .form-input:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-        }
-        
-        .form-textarea {
-            min-height: 150px;
-            resize: vertical;
-        }
-        
-        /* Footer */
-        footer {
-            background-color: var(--primary);
-            padding: 2rem;
-            text-align: center;
-        }
-        
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .social-icons a {
-            color: var(--text);
-            font-size: 1.5rem;
-            transition: color 0.3s;
-        }
-        
-        .social-icons a:hover {
-            color: var(--accent);
-        }
-        
-        .copyright {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-        
-        /* Animation Keyframes */
-        @keyframes glitch {
-            0% {
-                text-shadow: 3px 3px 0 var(--primary);
-            }
-            2% {
-                text-shadow: -3px -3px 0 var(--accent);
-            }
-            4% {
-                text-shadow: 3px 3px 0 var(--primary);
-            }
-            50% {
-                text-shadow: 3px 3px 0 var(--primary);
-            }
-            52% {
-                text-shadow: -5px -1px 0 var(--accent);
-            }
-            54% {
-                text-shadow: 3px 3px 0 var(--primary);
-            }
-            100% {
-                text-shadow: 3px 3px 0 var(--primary);
-            }
-        }
-        
-        /* Scroll Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s, transform 0.8s;
-        }
-        
-        .fade-in.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .window {
-                width: 100%;
-            }
-  
-            /* Give more space for the text and values */
-            .skill-name {
-                margin-right: 5px;
-            }
-  
-            /* Make progress bars fit */
-            .skills {
-                width: 100%;
-                max-width: 100%;
-            }
 
-            /* Make text fit better */
-            .skill-name {
-                margin-right: 5px;
-            }
-
-            .mode-toggle-wrapper {
-                max-width: 200px;
-                margin-right: 0;
-            }
-            
-            .mode-label {
-                font-size: 0.5rem;
-                max-width: 60px;
-                text-align: center;
-                line-height: 1.2;
-            }
-            
-            .nav {
-                padding: 1.5rem 1rem;
-            }
-            
-            .logo {
-                font-size: 1rem;
-                max-width: 120px;
-            }
+        /* Make progress bars fit */
+        .skills {
+          width: 100%;
+          max-width: 100%;
         }
-        
-        /* Even smaller screens */
-        @media (max-width: 480px) {
+
+        /* Make text fit better */
+        .skill-name {
+          margin-right: 5px;
+        }
+
         .mode-toggle-wrapper {
-            max-width: 170px;
+          max-width: 200px;
+          margin-right: 0;
+        }
+
+        .mode-label {
+          font-size: 0.5rem;
+          max-width: 60px;
+          text-align: center;
+          line-height: 1.2;
+        }
+
+        .nav {
+          padding: 1.5rem 1rem;
+        }
+
+        .logo {
+          font-size: 1rem;
+          max-width: 120px;
+        }
+      }
+
+      /* Even smaller screens */
+      @media (max-width: 480px) {
+        .mode-toggle-wrapper {
+          max-width: 170px;
         }
 
         .mode-label {
           font-size: 0.4rem;
           max-width: 45px;
         }
-        
+
         .logo {
           font-size: 0.9rem;
           max-width: 100px;
         }
-    }
+      }
 
-        /* toggle */
-        .toggle-container {
-          --knob-size: 1.75em;
-          display: flex;
-          justify-content: center;
-          position: relative;
-          transform: scale(0.9);
+      /* toggle */
+      .toggle-container {
+        --knob-size: 1.75em;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        transform: scale(0.9);
+      }
+
+      .toggle-input {
+        position: absolute;
+        z-index: 2;
+        bottom: 132.5%;
+        border-radius: 50%;
+        transform: rotate(-25deg);
+        transform-origin: 50% 4.75em;
+        width: var(--knob-size);
+        height: var(--knob-size);
+        opacity: 0;
+        /* fix em sizing */
+        font: inherit;
+        transition: transform 0.24s cubic-bezier(0.65, 1.35, 0.5, 1);
+        cursor: pointer;
+      }
+
+      .toggle-input:checked {
+        transform: rotate(25deg);
+      }
+
+      .toggle-handle-wrapper {
+        position: absolute;
+        z-index: 1;
+        bottom: -135%;
+        -webkit-mask-image: linear-gradient(
+          to bottom,
+          #000 62.125%,
+          transparent 50%
+        );
+        mask-image: linear-gradient(to bottom, #000 62.125%, transparent 50%);
+        width: 200%;
+        overflow: hidden;
+      }
+
+      .toggle-handle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        transform: rotate(-25deg);
+        transform-origin: bottom center;
+        transition: transform 0.24s cubic-bezier(0.65, 1.35, 0.5, 1);
+      }
+
+      .toggle-input:checked + .toggle-handle-wrapper > .toggle-handle {
+        transform: rotate(25deg);
+      }
+
+      .toggle-handle-knob {
+        position: relative;
+        z-index: 1;
+        border-radius: 50%;
+        width: var(--knob-size);
+        height: var(--knob-size);
+        background-image: radial-gradient(
+          farthest-corner at 70% 30%,
+          #fedee2 4%,
+          #d63534 12% 24%,
+          #a81a1a 50% 65%,
+          #d63534 75%
+        );
+        transition: transform 0.24s cubic-bezier(0.65, 1.35, 0.5, 1);
+      }
+
+      .toggle-input:checked + .toggle-handle-wrapper .toggle-handle-knob {
+        transform: rotate(-90deg);
+      }
+
+      /* toggle handle knob hover inner shadow */
+      .toggle-handle-knob::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-radius: inherit;
+        width: 100%;
+        height: 100%;
+        box-shadow: inset 0 0 8px 2px rgb(255 255 255 / 0.4);
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+
+      @media (hover: hover) {
+        .toggle-input:hover + .toggle-handle-wrapper .toggle-handle-knob::after,
+        .toggle-input:focus-visible
+          + .toggle-handle-wrapper
+          .toggle-handle-knob::after {
+          opacity: 1;
+        }
+      }
+
+      .toggle-handle-bar-wrapper {
+        position: relative;
+        width: 0.5em;
+        height: 3em;
+      }
+
+      .toggle-handle-bar {
+        position: absolute;
+        top: calc(var(--knob-size) / 2 * -1);
+        left: 0;
+        width: 100%;
+        height: calc(100% + var(--knob-size) / 2);
+        background-image: linear-gradient(
+          to right,
+          #777475,
+          #a4a4a4,
+          #fff 45% 55%,
+          #a4a4a4,
+          #777475
+        );
+        background-position-x: 0.06125em;
+        transition: background-position-x 0.24s cubic-bezier(0.65, 1.35, 0.5, 1);
+        box-shadow: inset 0 1em 0.25em rgb(0 0 0 / 0.4);
+      }
+
+      .toggle-input:checked + .toggle-handle-wrapper .toggle-handle-bar {
+        background-position-x: -0.06125em;
+      }
+
+      .toggle-base {
+        position: relative;
+        border-radius: 3.125em;
+        padding: 0.25em;
+        width: 3.5em;
+        height: 1.125em;
+        background-color: #fff;
+        background-image: linear-gradient(to bottom, #fff, #d7d7d7);
+        box-shadow: 0 -0.25em 0.5em #fff, 0 0.25em 0.5em #d7d7d7;
+      }
+
+      .toggle-base-inside {
+        position: relative;
+        border-radius: inherit;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to bottom, #a6a6a6, #7d7d7d);
+        box-shadow: inset 0 0.0625em rgb(255 255 255 / 0.2),
+          inset 0 -0.03125em rgb(255 255 255 / 1),
+          inset 0 -0.0625em 0.25em rgb(0 0 0 / 0.1);
+      }
+
+      /* toggle base inside active */
+      .toggle-base-inside::after {
+        content: "";
+        position: absolute;
+        border-radius: inherit;
+        width: 100%;
+        height: 100%;
+        background-image: linear-gradient(to bottom, #5ab054, #438c3c);
+        box-shadow: inherit;
+        opacity: 0;
+        transition: opacity 0.24s cubic-bezier(0.65, 1.35, 0.5, 1);
+      }
+
+      .toggle-input:checked ~ .toggle-base .toggle-base-inside::after {
+        opacity: 1;
+      }
+      .mode-toggle-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        position: absolute;
+        width: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        justify-content: center;
+        z-index: 10;
+      }
+
+      .mode-label {
+        font-family: "Press Start 2P", cursive;
+        font-size: 0.6rem;
+        color: var(--text);
+        white-space: normal;
+        text-align: center;
+        line-height: 1.2;
+        width: 80px;
+      }
+      .menu-toggle {
+        position: relative;
+        width: 24px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 20;
+        margin-left: auto;
+        overflow: visible;
+      }
+
+      .menu-toggle span {
+        position: absolute;
+        width: 100%; /* 100% of the 24px width */
+        height: 3px;
+        background-color: var(--text);
+        transition: 0.4s ease;
+        right: 0;
+      }
+
+      .menu-toggle span:nth-child(1) {
+        top: 0;
+      }
+
+      .menu-toggle span:nth-child(2) {
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .menu-toggle span:nth-child(3) {
+        bottom: 0;
+      }
+
+      .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg);
+        top: 50%;
+      }
+
+      .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg);
+        bottom: auto;
+        top: 50%;
+      }
+
+      @media (max-width: 768px) {
+        nav {
+          padding: 1rem 1.5rem;
         }
 
-.toggle-input {
-  position: absolute;
-  z-index: 2;
-  bottom: 132.5%;
-  border-radius: 50%;
-  transform: rotate(-25deg);
-  transform-origin: 50% 4.75em;
-  width: var(--knob-size);
-  height: var(--knob-size);
-  opacity: 0;
-  /* fix em sizing */
-  font: inherit;
-  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
-  cursor: pointer;
-}
+        .logo {
+          font-size: 1rem;
+        }
 
-.toggle-input:checked {
-  transform: rotate(25deg);
-}
+        .mode-toggle-wrapper {
+          width: 220px;
+          transform: translateX(-50%) scale(0.75);
+        }
 
-.toggle-handle-wrapper {
-  position: absolute;
-  z-index: 1;
-  bottom: -135%;
-  -webkit-mask-image: linear-gradient(to bottom, #000 62.125%, transparent 50%);
-  mask-image: linear-gradient(to bottom, #000 62.125%, transparent 50%);
-  width: 200%;
-  overflow: hidden;
-}
+        /* Fix the top padding of content sections */
+        .hero,
+        header {
+          padding-top: 100px;
+        }
 
-.toggle-handle {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  transform: rotate(-25deg);
-  transform-origin: bottom center;
-  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
-}
+        .mode-label {
+          font-size: 0.5rem;
+          width: 70px;
+        }
+      }
 
-.toggle-input:checked + .toggle-handle-wrapper > .toggle-handle {
-  transform: rotate(25deg);
-}
+      @media (max-width: 767px) {
+        .mode-toggle-wrapper {
+          position: absolute;
+          top: 80px; /* Below navbar */
+          left: 50%;
+          transform: translateX(-50%);
+          padding: 8px 15px;
+          border-radius: 20px;
+          z-index: 90;
+          width: auto;
+          max-width: 280px;
+          background-color: rgba(72, 52, 212, 0.7);
+          border: 2px solid var(--accent);
+          box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+        }
 
-.toggle-handle-knob {
-  position: relative;
-  z-index: 1;
-  border-radius: 50%;
-  width: var(--knob-size);
-  height: var(--knob-size);
-  background-image: radial-gradient(farthest-corner at 70% 30%, #fedee2 4%, #d63534 12% 24%, #a81a1a 50% 65%, #d63534 75%);
-  transition: transform .24s cubic-bezier(.65, 1.35, .5, 1);
-}
+        :root {
+          --primary-rgb: 72, 52, 212; /* RGB version of #4834d4 */
+        }
 
-.toggle-input:checked + .toggle-handle-wrapper .toggle-handle-knob {
-  transform: rotate(-90deg);
-}
+        .mode-label {
+          font-size: 0.55rem;
+          line-height: 1.2;
+          text-align: center;
+          width: 80px;
+          white-space: normal; /* Enable text wrapping */
+          display: inline-block; /* Ensure block behavior */
+          overflow: visible; /* Prevent text cutoff */
+          padding: 0 5px;
+        }
 
-/* toggle handle knob hover inner shadow */
-.toggle-handle-knob::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: inherit;
-  width: 100%;
-  height: 100%;
-  box-shadow: inset 0 0 8px 2px rgb(255 255 255 / .4);
-  opacity: 0;
-  transition: opacity .2s;
-}
+        .toggle-container {
+          transform: scale(0.8);
+          margin: 0 5px;
+        }
 
-@media (hover: hover) {
-  .toggle-input:hover + .toggle-handle-wrapper .toggle-handle-knob::after,
-  .toggle-input:focus-visible + .toggle-handle-wrapper .toggle-handle-knob::after {
-    opacity: 1;
-  }
-}
+        /* Add space below the toggle for content */
+        .hero {
+          padding-top: 145px !important;
+        }
+      }
 
-.toggle-handle-bar-wrapper {
-  position: relative;
-  width: .5em;
-  height: 3em;
-}
+      .index-page .mode-toggle-wrapper {
+        background-color: var(--primary); /* Blue background for index page */
+        border-color: var(--accent);
+      }
 
-.toggle-handle-bar {
-  position: absolute;
-  top: calc(var(--knob-size) / 2 * -1);
-  left: 0;
-  width: 100%;
-  height: calc(100% + var(--knob-size) / 2);
-  background-image: linear-gradient(to right, #777475, #a4a4a4, #fff 45% 55%, #a4a4a4, #777475);
-  background-position-x: .06125em;
-  transition: background-position-x .24s cubic-bezier(.65, 1.35, .5, 1);
-  box-shadow: inset 0 1em .25em rgb(0 0 0 / .4);
-}
+      @media (max-width: 480px) {
+        .logo {
+          font-size: 0.9rem;
+        }
 
-.toggle-input:checked + .toggle-handle-wrapper .toggle-handle-bar {
-  background-position-x: -.06125em;
-}
+        .mode-toggle-wrapper {
+          width: 200px;
+          transform: translateX(-50%) scale(0.9);
+        }
 
-.toggle-base {
-  position: relative;
-  border-radius: 3.125em;
-  padding: .25em;
-  width: 3.5em;
-  height: 1.125em;
-  background-color: #fff;
-  background-image: linear-gradient(to bottom, #fff, #d7d7d7);
-  box-shadow: 0 -.25em .5em #fff, 0 .25em .5em #d7d7d7;
-}
+        .mode-label {
+          font-size: 0.45rem;
+          width: 60px;
+        }
+      }
 
-.toggle-base-inside {
-  position: relative;
-  border-radius: inherit;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to bottom, #a6a6a6, #7d7d7d);
-  box-shadow: inset 0 .0625em rgb(255 255 255 / .2), inset 0 -.03125em rgb(255 255 255 / 1), inset 0 -.0625em .25em rgb(0 0 0 / .1);
-}
+      /* Skills loading animation */
+      @keyframes fillBar {
+        from {
+          width: 0;
+        }
+        to {
+          width: var(--skill-percent);
+        }
+      }
 
-/* toggle base inside active */
-.toggle-base-inside::after {
-  content: '';
-  position: absolute;
-  border-radius: inherit;
-  width: 100%;
-  height: 100%;
-  background-image: linear-gradient(to bottom, #5ab054, #438c3c);
-  box-shadow: inherit;
-  opacity: 0;
-  transition: opacity .24s cubic-bezier(.65, 1.35, .5, 1);
-}
+      .skill-progress {
+        width: 0; /* Start with empty bars */
+        position: relative;
+      }
 
-.toggle-input:checked ~ .toggle-base .toggle-base-inside::after {
-  opacity: 1;
-}
-.mode-toggle-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  position: absolute;
-  width: auto;
-  left: 50%;
-  transform: translateX(-50%);
-  justify-content: center;
-  z-index: 10;
-}
+      .skill-progress.animate {
+        animation: fillBar 1.5s forwards;
+      }
 
-.mode-label {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.6rem;
-  color: var(--text);
-  white-space: normal;
-  text-align: center;
-  line-height: 1.2;
-  width: 80px;
-}
-.menu-toggle {
-  position: relative;
-  width: 24px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 20;
-  margin-left: auto;
-  overflow: visible;
-}
+      .video-demo {
+        position: relative;
+      }
 
-.menu-toggle span {
-  position: absolute;
-  width: 100%; /* 100% of the 24px width */
-  height: 3px;
-  background-color: var(--text);
-  transition: 0.4s ease;
-  right: 0;
-}
+      .demo-label {
+        position: absolute;
+        bottom: -20px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 0.7rem;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
 
-.menu-toggle span:nth-child(1) {
-  top: 0;
-}
+      .video-demo:hover .demo-label {
+        opacity: 1;
+      }
 
-.menu-toggle span:nth-child(2) {
-  top: 50%;
-  transform: translateY(-50%);
-}
+      .windows-startup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s;
+      }
 
-.menu-toggle span:nth-child(3) {
-  bottom: 0;
-}
+      .startup-content {
+        text-align: center;
+        width: 100%;
+        height: 100%;
+      }
 
-.menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg);
-  top: 50%;
-}
+      .boot-screen {
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+      }
 
-.menu-toggle.active span:nth-child(2) {
-  opacity: 0;
-}
+      .boot-container {
+        width: 100%;
+        height: 100%;
+        background-color: #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
 
-.menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg);
-  bottom: auto;
-  top: 50%;
-}
+      .xp-logo {
+        display: flex;
+        align-items: center;
+        margin-bottom: 40px;
+      }
 
-@media (max-width: 768px) {
-    nav {
-        padding: 1rem 1.5rem;
-    }
-    
-    .logo {
-        font-size: 1rem;
-    }
-    
-    .mode-toggle-wrapper {
-        width: 220px;
-        transform: translateX(-50%) scale(0.75);
-    }
-    
-    /* Fix the top padding of content sections */
-    .hero, header {
-        padding-top: 100px;
-    }
+      .xp-logo-container {
+        width: 300px;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
 
-    .mode-label {
-    font-size: 0.5rem;
-    width: 70px;
-  }
+      .xp-wordmark {
+        width: 100%;
+        height: auto;
+        margin-bottom: 80px;
+        filter: drop-shadow(0 0 5px rgba(0, 125, 255, 0.5));
+      }
 
-}
+      .boot-progress-bar {
+        width: 260px;
+        height: 20px;
+        background-color: #111;
+        border-radius: 10px;
+        overflow: hidden;
+        position: relative;
+        border: 1px solid #333;
+        box-shadow: 0 0 10px rgba(0, 40, 80, 0.5);
+      }
 
-@media (max-width: 767px) {
-  .mode-toggle-wrapper {
-    position: absolute;
-    top: 80px; /* Below navbar */
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 8px 15px;
-    border-radius: 20px;
-    z-index: 90;
-    width: auto;
-    max-width: 280px;
-    background-color: rgba(72, 52, 212, 0.7);
-    border: 2px solid var(--accent);
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-  }
+      .progress-block {
+        width: 20%;
+        height: 100%;
+        background-color: #3b79c7;
+        position: absolute;
+        left: -20%;
+        animation: moveProgress 3s infinite ease-in-out;
+      }
 
-  :root {
-    --primary-rgb: 72, 52, 212; /* RGB version of #4834d4 */
-  }
+      .windows-flag {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        gap: 2px;
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+      }
 
-  .mode-label {
-    font-size: 0.55rem;
-    line-height: 1.2;
-    text-align: center;
-    width: 80px;
-    white-space: normal; /* Enable text wrapping */
-    display: inline-block; /* Ensure block behavior */
-    overflow: visible; /* Prevent text cutoff */
-    padding: 0 5px;
-  }
-  
-  .toggle-container {
-    transform: scale(0.8);
-    margin: 0 5px;
-  }
+      .flag-red {
+        background-color: #f65314;
+      }
 
-  /* Add space below the toggle for content */
-  .hero {
-    padding-top: 145px !important;
-  }
-}
+      .flag-green {
+        background-color: #7cbb00;
+      }
 
-.index-page .mode-toggle-wrapper {
-  background-color: var(--primary); /* Blue background for index page */
-  border-color: var(--accent);
-}
+      .flag-blue {
+        background-color: #00a1f1;
+      }
 
-@media (max-width: 480px) {
-    .logo {
-        font-size: 0.9rem;
-    }
-    
-    .mode-toggle-wrapper {
+      .flag-yellow {
+        background-color: #ffbb00;
+      }
+
+      .text {
+        text-align: left;
+      }
+
+      .windows-text {
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        color: #fff;
+        font-size: 24px;
+      }
+
+      .xp-text {
+        font-style: italic;
+        margin-left: 2px;
+      }
+
+      .professional-text {
+        font-family: Arial, sans-serif;
+        color: #fff;
+        font-size: 16px;
+      }
+
+      .loading-bar {
         width: 200px;
-        transform: translateX(-50%) scale(0.9);
-    }
-    
-    .mode-label {
-        font-size: 0.45rem;
-        width: 60px;
-    }
+        height: 20px;
+        position: relative;
+        margin: 20px auto;
+      }
 
-}
+      .loading-blocks {
+        display: flex;
+        gap: 2px;
+        height: 100%;
+        animation: moveBlocks 3s infinite;
+      }
 
-/* Skills loading animation */
-@keyframes fillBar {
-  from { width: 0; }
-  to { width: var(--skill-percent); }
-}
+      .block {
+        width: 20px;
+        height: 100%;
+        background-color: #0065cb;
+        animation: pulse 1s infinite alternate;
+      }
 
-.skill-progress {
-  width: 0; /* Start with empty bars */
-  position: relative;
-}
+      .block:nth-child(2) {
+        animation-delay: 0.3s;
+      }
 
-.skill-progress.animate {
-  animation: fillBar 1.5s forwards;
-}
+      .block:nth-child(3) {
+        animation-delay: 0.6s;
+      }
 
-.video-demo {
-    position: relative;
-}
+      @keyframes moveBlocks {
+        0% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(160px);
+        }
+      }
 
-.demo-label {
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 0.7rem;
-    white-space: nowrap;
-    opacity: 0;
-    transition: opacity 0.3s;
-}
+      @keyframes pulse {
+        0% {
+          opacity: 0.7;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
 
-.video-demo:hover .demo-label {
-    opacity: 1;
-}
+      @keyframes moveProgress {
+        0% {
+          left: -20%;
+        }
+        100% {
+          left: 100%;
+        }
+      }
 
-.windows-startup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 0.5s;
-}
+      .interaction-message {
+        position: absolute;
+        bottom: 40px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        font-size: 14px;
+      }
 
-.startup-content {
-  text-align: center;
-  width: 100%;
-  height: 100%;
-}
+      .hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-.boot-screen {
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
+      .copyright-text {
+        position: absolute;
+        bottom: 20px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        font-size: 12px;
+        opacity: 0.7;
+      }
 
-.boot-container {
-  width: 100%;
-  height: 100%;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+      .hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-.xp-logo {
-  display: flex;
-  align-items: center;
-  margin-bottom: 40px;
-}
-
-.xp-logo-container {
-  width: 300px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.xp-wordmark {
-  width: 100%;
-  height: auto;
-  margin-bottom: 80px;
-  filter: drop-shadow(0 0 5px rgba(0, 125, 255, 0.5));
-}
-
-.boot-progress-bar {
-  width: 260px;
-  height: 20px;
-  background-color: #111;
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid #333;
-  box-shadow: 0 0 10px rgba(0, 40, 80, 0.5);
-}
-
-.progress-block {
-  width: 20%;
-  height: 100%;
-  background-color: #3b79c7;
-  position: absolute;
-  left: -20%;
-  animation: moveProgress 3s infinite ease-in-out;
-}
-
-.windows-flag {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 2px;
-  width: 40px;
-  height: 40px;
-  margin-right: 10px;
-}
-
-.flag-red {
-  background-color: #F65314;
-}
-
-.flag-green {
-  background-color: #7CBB00;
-}
-
-.flag-blue {
-  background-color: #00A1F1;
-}
-
-.flag-yellow {
-  background-color: #FFBB00;
-}
-
-.text {
-  text-align: left;
-}
-
-.windows-text {
-  font-family: Arial, sans-serif;
-  font-weight: bold;
-  color: #fff;
-  font-size: 24px;
-}
-
-.xp-text {
-  font-style: italic;
-  margin-left: 2px;
-}
-
-.professional-text {
-  font-family: Arial, sans-serif;
-  color: #fff;
-  font-size: 16px;
-}
-
-.loading-bar {
-  width: 200px;
-  height: 20px;
-  position: relative;
-  margin: 20px auto;
-}
-
-.loading-blocks {
-  display: flex;
-  gap: 2px;
-  height: 100%;
-  animation: moveBlocks 3s infinite;
-}
-
-.block {
-  width: 20px;
-  height: 100%;
-  background-color: #0065CB;
-  animation: pulse 1s infinite alternate;
-}
-
-.block:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-.block:nth-child(3) {
-  animation-delay: 0.6s;
-}
-
-@keyframes moveBlocks {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(160px); }
-}
-
-@keyframes pulse {
-  0% { opacity: 0.7; }
-  100% { opacity: 1; }
-}
-
-@keyframes moveProgress {
-  0% { left: -20%; }
-  100% { left: 100%; }
-}
-
-.interaction-message {
-  position: absolute;
-  bottom: 40px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  color: #fff;
-  font-size: 14px;
-}
-
-.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.copyright-text {
-  position: absolute;
-  bottom: 20px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  color: #fff;
-  font-size: 12px;
-  opacity: 0.7;
-}
-
-.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-.interaction-message {
-  position: absolute;
-  bottom: 60px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-family: Arial, sans-serif;
-  color: #fff;
-  font-size: 14px;
-}
-
-
+      .interaction-message {
+        position: absolute;
+        bottom: 60px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        color: #fff;
+        font-size: 14px;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div id="windows-startup" class="windows-startup">
-        <div class="startup-content">
-          <div class="boot-container">
-            <div class="xp-logo-container">
-              <img src="https://i.imgur.com/EF6eHiJ.png" alt="Windows XP" class="xp-wordmark">
-              <div class="boot-progress-bar">
-                <div class="progress-block"></div>
+      <div class="startup-content">
+        <div class="boot-container">
+          <div class="xp-logo-container">
+            <!-- Inline SVG Windows XP Logo -->
+            <svg
+              class="xp-wordmark"
+              viewBox="0 0 400 100"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <defs>
+                <linearGradient
+                  id="blueGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: #0f75bc; stop-opacity: 1"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: #0553a0; stop-opacity: 1"
+                  />
+                </linearGradient>
+                <linearGradient
+                  id="greenGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: #7fba00; stop-opacity: 1"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: #5e9500; stop-opacity: 1"
+                  />
+                </linearGradient>
+                <linearGradient
+                  id="redGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: #f65314; stop-opacity: 1"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: #c9321c; stop-opacity: 1"
+                  />
+                </linearGradient>
+                <linearGradient
+                  id="yellowGrad"
+                  x1="0%"
+                  y1="0%"
+                  x2="100%"
+                  y2="100%"
+                >
+                  <stop
+                    offset="0%"
+                    style="stop-color: #ffbb00; stop-opacity: 1"
+                  />
+                  <stop
+                    offset="100%"
+                    style="stop-color: #dd9000; stop-opacity: 1"
+                  />
+                </linearGradient>
+              </defs>
+
+              <!-- Windows Flag -->
+              <g transform="translate(10, 20)">
+                <rect
+                  fill="url(#redGrad)"
+                  x="0"
+                  y="0"
+                  width="30"
+                  height="30"
+                  rx="2"
+                />
+                <rect
+                  fill="url(#greenGrad)"
+                  x="35"
+                  y="0"
+                  width="30"
+                  height="30"
+                  rx="2"
+                />
+                <rect
+                  fill="url(#blueGrad)"
+                  x="0"
+                  y="35"
+                  width="30"
+                  height="30"
+                  rx="2"
+                />
+                <rect
+                  fill="url(#yellowGrad)"
+                  x="35"
+                  y="35"
+                  width="30"
+                  height="30"
+                  rx="2"
+                />
+              </g>
+
+              <!-- Windows XP Text -->
+              <text
+                x="90"
+                y="45"
+                font-family="Franklin Gothic Medium, Arial, sans-serif"
+                font-size="36"
+                fill="#ffffff"
+                font-weight="bold"
+              >
+                Microsoft
+              </text>
+              <text
+                x="90"
+                y="75"
+                font-family="Franklin Gothic Medium, Arial, sans-serif"
+                font-size="32"
+                fill="#ffffff"
+                font-weight="bold"
+              >
+                <tspan fill="#ffffff">Windows</tspan>
+                <tspan fill="#FFC600" font-style="italic">XP</tspan>
+              </text>
+            </svg>
+            <div class="boot-progress-bar">
+              <div class="progress-block"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Navigation -->
+    <nav>
+      <div class="logo">PORTFOLIO</div>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="interactive.html">Interactive</a>
+        <a href="data.html">Data Projects</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+
+      <div class="mode-toggle-wrapper">
+        <span class="mode-label">Coding Stuff</span>
+        <div class="toggle-container" title="Switch Mode">
+          <input class="toggle-input" type="checkbox" id="modeToggle" />
+          <div class="toggle-handle-wrapper">
+            <div class="toggle-handle">
+              <div class="toggle-handle-knob"></div>
+              <div class="toggle-handle-bar-wrapper">
+                <div class="toggle-handle-bar"></div>
+              </div>
+            </div>
+          </div>
+          <div class="toggle-base">
+            <div class="toggle-base-inside"></div>
+          </div>
+        </div>
+        <span class="mode-label">Normal Me Stuff</span>
+      </div>
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="pixel-art"></div>
+      <div class="parallax-stars" id="stars"></div>
+      <div class="hero-content">
+        <h1>Logic & Lattes</h1>
+        <p class="subtitle">Web Developer & Designer</p>
+        <a href="#projects" class="cta-btn pixel-corners">VIEW MY WORK</a>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+      <h2 class="section-title">ABOUT ME</h2>
+      <div class="windows-container">
+        <div class="window pixel-corners fade-in">
+          <div class="window-header">
+            <div class="window-title">bio.exe</div>
+            <div class="window-controls">
+              <div class="control"></div>
+              <div class="control"></div>
+              <div class="control"></div>
+            </div>
+          </div>
+          <div class="window-content">
+            <div class="about-text">
+              <p>
+                Hello! I'm Malavika, a computer science graduate with a passion
+                for creating beautiful, functional websites and applications.
+              </p>
+              <p>
+                With skills in front-end and back-end development, I enjoy
+                turning complex problems into simple, beautiful solutions. My
+                goal is always to build products that are both visually
+                appealing and user-friendly.
+              </p>
+              <p>
+                When I'm not coding, you can find me exploring new technologies,
+                reading, or working on creative coding projects.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="window pixel-corners fade-in">
+          <div class="window-header">
+            <div class="window-title">skills.exe</div>
+            <div class="window-controls">
+              <div class="control"></div>
+              <div class="control"></div>
+              <div class="control"></div>
+            </div>
+          </div>
+          <div class="window-content">
+            <div class="skills">
+              <div class="skill-item">
+                <div class="skill-name">
+                  <span>HTML/CSS</span>
+                  <span>90%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-percent="90%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-name">
+                  <span>JavaScript</span>
+                  <span>85%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-percent="85%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-name">
+                  <span>React</span>
+                  <span>80%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-percent="80%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-name">
+                  <span>Node.js</span>
+                  <span>75%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-percent="75%"></div>
+                </div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-name">
+                  <span>Python</span>
+                  <span>70%</span>
+                </div>
+                <div class="skill-bar">
+                  <div class="skill-progress" data-percent="70%"></div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    <!-- Navigation -->
-    <nav>
-        <div class="logo">PORTFOLIO</div>
-        <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="index.html#about">About</a>
-            <a href="index.html#projects">Projects</a>
-            <a href="interactive.html">Interactive</a>
-            <a href="data.html">Data Projects</a>
-            <a href="index.html#contact">Contact</a>
-        </div>
+    </section>
 
-        <div class="mode-toggle-wrapper">
-            <span class="mode-label">Coding Stuff</span>
-            <div class="toggle-container" title="Switch Mode">
-              <input class="toggle-input" type="checkbox" id="modeToggle">
-              <div class="toggle-handle-wrapper">
-                <div class="toggle-handle">
-                  <div class="toggle-handle-knob"></div>
-                  <div class="toggle-handle-bar-wrapper">
-                    <div class="toggle-handle-bar"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="toggle-base">
-                <div class="toggle-base-inside"></div>
-              </div>
-            </div>
-            <span class="mode-label">Normal Me Stuff</span>
-          </div>
-        <div class="menu-toggle" id="menuToggle">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="pixel-art"></div>
-        <div class="parallax-stars" id="stars"></div>
-        <div class="hero-content">
-            <h1>Logic & Lattes</h1>
-            <p class="subtitle">Web Developer & Designer</p>
-            <a href="#projects" class="cta-btn pixel-corners">VIEW MY WORK</a>
-        </div>
-    </section>
-    
-    <!-- About Section -->
-    <section id="about">
-        <h2 class="section-title">ABOUT ME</h2>
-        <div class="windows-container">
-            <div class="window pixel-corners fade-in">
-                <div class="window-header">
-                    <div class="window-title">bio.exe</div>
-                    <div class="window-controls">
-                        <div class="control"></div>
-                        <div class="control"></div>
-                        <div class="control"></div>
-                    </div>
-                </div>
-                <div class="window-content">
-                    <div class="about-text">
-                        <p>Hello! I'm Malavika, a computer science graduate with a passion for creating beautiful, functional websites and applications.</p>
-                        <p>With skills in front-end and back-end development, I enjoy turning complex problems into simple, beautiful solutions. My goal is always to build products that are both visually appealing and user-friendly.</p>
-                        <p>When I'm not coding, you can find me exploring new technologies, reading, or working on creative coding projects.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="window pixel-corners fade-in">
-                <div class="window-header">
-                    <div class="window-title">skills.exe</div>
-                    <div class="window-controls">
-                        <div class="control"></div>
-                        <div class="control"></div>
-                        <div class="control"></div>
-                    </div>
-                </div>
-                <div class="window-content">
-                    <div class="skills">
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>HTML/CSS</span>
-                                <span>90%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-percent="90%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>JavaScript</span>
-                                <span>85%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-percent="85%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>React</span>
-                                <span>80%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-percent="80%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Node.js</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-percent="75%"></div>
-                            </div>
-                        </div>
-                        <div class="skill-item">
-                            <div class="skill-name">
-                                <span>Python</span>
-                                <span>70%</span>
-                            </div>
-                            <div class="skill-bar">
-                                <div class="skill-progress" data-percent="70%"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    
     <!-- Projects Section -->
     <section id="projects">
-        <h2 class="section-title">MY PROJECTS</h2>
-        <div class="projects-container">
-            <div class="project-card pixel-corners fade-in">
-                <div class="project-img">
-                    <img src="https://art.pixilart.com/sr294b1d72f4181.gif" alt="Project 1">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Crumb Chronicles</h3>
-                    <p class="project-desc">A web game where players are interviewed by a sentient toaster. Originally made as text-based C++ game for a module during my first year.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/malavikaswapna/Crumb-Chronicles.git" title="View Code"><i class="fas fa-code"></i></a>
-                        <a href="https://malavikaswapna.github.io/Crumb-Chronicles/" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
+      <h2 class="section-title">MY PROJECTS</h2>
+      <div class="projects-container">
+        <div class="project-card pixel-corners fade-in">
+          <div class="project-img">
+            <img
+              src="https://art.pixilart.com/sr294b1d72f4181.gif"
+              alt="Project 1"
+            />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Crumb Chronicles</h3>
+            <p class="project-desc">
+              A web game where players are interviewed by a sentient toaster.
+              Originally made as text-based C++ game for a module during my
+              first year.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/malavikaswapna/Crumb-Chronicles.git"
+                title="View Code"
+                ><i class="fas fa-code"></i
+              ></a>
+              <a
+                href="https://malavikaswapna.github.io/Crumb-Chronicles/"
+                title="Live Demo"
+                ><i class="fas fa-external-link-alt"></i
+              ></a>
             </div>
-            
-            <div class="project-card pixel-corners fade-in">
-                <div class="project-img">
-                    <img src="https://art.pixilart.com/sr2718524b6cfaws3.png" alt="Project 2">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Sol - Weather Dashboard</h3>
-                    <p class="project-desc">A weather application with an interactive pixel art interface. Built with vanilla JavaScript, this Progressive Web App uses the OpenWeatherMap API to display current weather conditions, forecasts, air quality data, and temperature history with custom retro-style animations. Features include geolocation, unit conversion, dark/light themes, and offline support.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/malavikaswapna/sol.git" title="View Code"><i class="fas fa-code"></i></a>
-                        <a href="https://malavikaswapna.github.io/sol/" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="project-card pixel-corners fade-in">
-                <div class="project-img">
-                    <img src="https://play-lh.googleusercontent.com/4QfmxpEWHhpJNtqht2O3Zbj_Enx8X2arc0tU5ykjQ2SE40yx4oxvjAdqn8-5-gZ9tmc" alt="Project 3">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">CheckMate - Task Management App</h3>
-                    <p class="project-desc">A comprehensive productivity system built with vanilla JavaScript, Firebase, and external APIs. CheckMate combines task management, Pomodoro timing, and context-aware suggestions through weather integration. Features include user authentication, custom categories, dashboard analytics with visual charts, calendar views, and cloud synchronization. The app provides intelligent task prioritization suggestions based on weather conditions and personal productivity patterns.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/malavikaswapna/CheckMate-App.git" title="View Code"><i class="fas fa-code"></i></a>
-                        <a href="https://youtu.be/2_kt--FPF_s" target="_blank" title="Watch Demo"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card pixel-corners fade-in">
-                <div class="project-img">
-                    <img src="https://i.imgur.com/6u8Rj44.jpeg" alt="Project 4">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Book Library API</h3>
-                    <p class="project-desc">A full-stack application for managing personal book collections with JWT authentication, role-based access control, and a RESTful API. Built with Node.js, Koa.js, MySQL, and React, featuring responsive design and comprehensive filtering options.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/malavikaswapna/book-library-api.git" title="View Code"><i class="fas fa-code"></i></a>
-                        <a href="https://youtu.be/Rx0vtbF4guI" target="_blank" title="Watch Demo"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card pixel-corners fade-in">
-                <div class="project-img">
-                    <img src="https://art.pixilart.com/sr2534a729105aws3.png" alt="Project 5">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">MotionUI</h3>
-                    <p class="project-desc">A gesture-controlled web interface that transforms your webcam into a touchless input device. Built with MediaPipe and TensorFlow.js, this project enables users to navigate, scroll, and click using only hand movements. Features include real-time hand tracking with a virtual cursor, smooth gesture recognition, and keyboard fallbacks.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/malavikaswapna/motion-ui.git" title="View Code"><i class="fas fa-code"></i></a>
-                        <a href="https://harmonious-pixie-0615b4.netlify.app/" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card pixel-corners fade-in">
-                <div class="project-img">
-                    <img src="https://art.pixilart.com/sr2bfbcab7dffaws3.png" alt="Project 6">
-                </div>
-                <div class="project-content">
-                    <h3 class="project-title">Developer's Fortune Teller</h3>
-                    <p class="project-desc">A mystical web application that reveals insights about your past, present, and future as a developer through interactive tarot-inspired card readings. Built with vanilla JavaScript and Firebase, this app features card selection animations, personalized interpretations based on card combinations, user authentication, reading history, and export options. The sophisticated interpretation engine analyzes relationships between cards to create a unique narrative for each user.</p>
-                    <div class="project-links">
-                        <a href="https://github.com/malavikaswapna/fortune-teller-web.git" title="View Code"><i class="fas fa-code"></i></a>
-                        <a href="https://malavikaswapna.github.io/fortune-teller-web/" title="Live Demo"><i class="fas fa-external-link-alt"></i></a>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+
+        <div class="project-card pixel-corners fade-in">
+          <div class="project-img">
+            <img
+              src="https://art.pixilart.com/sr2718524b6cfaws3.png"
+              alt="Project 2"
+            />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Sol - Weather Dashboard</h3>
+            <p class="project-desc">
+              A weather application with an interactive pixel art interface.
+              Built with vanilla JavaScript, this Progressive Web App uses the
+              OpenWeatherMap API to display current weather conditions,
+              forecasts, air quality data, and temperature history with custom
+              retro-style animations. Features include geolocation, unit
+              conversion, dark/light themes, and offline support.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/malavikaswapna/sol.git"
+                title="View Code"
+                ><i class="fas fa-code"></i
+              ></a>
+              <a href="https://malavikaswapna.github.io/sol/" title="Live Demo"
+                ><i class="fas fa-external-link-alt"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card pixel-corners fade-in">
+          <div class="project-img">
+            <img
+              src="https://play-lh.googleusercontent.com/4QfmxpEWHhpJNtqht2O3Zbj_Enx8X2arc0tU5ykjQ2SE40yx4oxvjAdqn8-5-gZ9tmc"
+              alt="Project 3"
+            />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">CheckMate - Task Management App</h3>
+            <p class="project-desc">
+              A comprehensive productivity system built with vanilla JavaScript,
+              Firebase, and external APIs. CheckMate combines task management,
+              Pomodoro timing, and context-aware suggestions through weather
+              integration. Features include user authentication, custom
+              categories, dashboard analytics with visual charts, calendar
+              views, and cloud synchronization. The app provides intelligent
+              task prioritization suggestions based on weather conditions and
+              personal productivity patterns.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/malavikaswapna/CheckMate-App.git"
+                title="View Code"
+                ><i class="fas fa-code"></i
+              ></a>
+              <a
+                href="https://youtu.be/2_kt--FPF_s"
+                target="_blank"
+                title="Watch Demo"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card pixel-corners fade-in">
+          <div class="project-img">
+            <img src="https://i.imgur.com/6u8Rj44.jpeg" alt="Project 4" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Book Library API</h3>
+            <p class="project-desc">
+              A full-stack application for managing personal book collections
+              with JWT authentication, role-based access control, and a RESTful
+              API. Built with Node.js, Koa.js, MySQL, and React, featuring
+              responsive design and comprehensive filtering options.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/malavikaswapna/book-library-api.git"
+                title="View Code"
+                ><i class="fas fa-code"></i
+              ></a>
+              <a
+                href="https://youtu.be/Rx0vtbF4guI"
+                target="_blank"
+                title="Watch Demo"
+                ><i class="fab fa-youtube"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card pixel-corners fade-in">
+          <div class="project-img">
+            <img
+              src="https://art.pixilart.com/sr2534a729105aws3.png"
+              alt="Project 5"
+            />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">MotionUI</h3>
+            <p class="project-desc">
+              A gesture-controlled web interface that transforms your webcam
+              into a touchless input device. Built with MediaPipe and
+              TensorFlow.js, this project enables users to navigate, scroll, and
+              click using only hand movements. Features include real-time hand
+              tracking with a virtual cursor, smooth gesture recognition, and
+              keyboard fallbacks.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/malavikaswapna/motion-ui.git"
+                title="View Code"
+                ><i class="fas fa-code"></i
+              ></a>
+              <a
+                href="https://harmonious-pixie-0615b4.netlify.app/"
+                title="Live Demo"
+                ><i class="fas fa-external-link-alt"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+        <div class="project-card pixel-corners fade-in">
+          <div class="project-img">
+            <img
+              src="https://art.pixilart.com/sr2bfbcab7dffaws3.png"
+              alt="Project 6"
+            />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Developer's Fortune Teller</h3>
+            <p class="project-desc">
+              A mystical web application that reveals insights about your past,
+              present, and future as a developer through interactive
+              tarot-inspired card readings. Built with vanilla JavaScript and
+              Firebase, this app features card selection animations,
+              personalized interpretations based on card combinations, user
+              authentication, reading history, and export options. The
+              sophisticated interpretation engine analyzes relationships between
+              cards to create a unique narrative for each user.
+            </p>
+            <div class="project-links">
+              <a
+                href="https://github.com/malavikaswapna/fortune-teller-web.git"
+                title="View Code"
+                ><i class="fas fa-code"></i
+              ></a>
+              <a
+                href="https://malavikaswapna.github.io/fortune-teller-web/"
+                title="Live Demo"
+                ><i class="fas fa-external-link-alt"></i
+              ></a>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
-    
+
     <!-- Contact Section -->
     <section id="contact">
-        <h2 class="section-title">CONTACT ME</h2>
-        <div class="contact-container">
-            <div class="window pixel-corners fade-in">
-                <div class="window-header">
-                    <div class="window-title">message.exe</div>
-                    <div class="window-controls">
-                        <div class="control"></div>
-                        <div class="control"></div>
-                        <div class="control"></div>
-                    </div>
-                </div>
-                <div class="window-content">
-                    <div class="contact-form">
-                        <!-- Formspree-powered form -->
-                        <form action="https://formspree.io/f/mldbewzz" method="POST" id="contact-form">
-                            <div class="form-group">
-                                <label for="name" class="form-label">NAME:</label>
-                                <input type="text" name="name" id="name" class="form-input pixel-corners" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="form-label">EMAIL:</label>
-                                <input type="email" name="_replyto" id="email" class="form-input pixel-corners" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="message" class="form-label">MESSAGE:</label>
-                                <textarea name="message" id="message" class="form-textarea pixel-corners" required></textarea>
-                            </div>
-                            <!-- Honeypot field to prevent spam -->
-                            <input type="text" name="_gotcha" style="display:none">
-                            <button type="submit" class="cta-btn pixel-corners">SEND MESSAGE</button>
-                            <div id="form-status" class="form-status" style="margin-top: 15px; display: none;"></div>
-                        </form>
-                    </div>
-                </div>
+      <h2 class="section-title">CONTACT ME</h2>
+      <div class="contact-container">
+        <div class="window pixel-corners fade-in">
+          <div class="window-header">
+            <div class="window-title">message.exe</div>
+            <div class="window-controls">
+              <div class="control"></div>
+              <div class="control"></div>
+              <div class="control"></div>
             </div>
+          </div>
+          <div class="window-content">
+            <div class="contact-form">
+              <!-- Formspree-powered form -->
+              <form
+                action="https://formspree.io/f/mldbewzz"
+                method="POST"
+                id="contact-form"
+              >
+                <div class="form-group">
+                  <label for="name" class="form-label">NAME:</label>
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="form-input pixel-corners"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">EMAIL:</label>
+                  <input
+                    type="email"
+                    name="_replyto"
+                    id="email"
+                    class="form-input pixel-corners"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="message" class="form-label">MESSAGE:</label>
+                  <textarea
+                    name="message"
+                    id="message"
+                    class="form-textarea pixel-corners"
+                    required
+                  ></textarea>
+                </div>
+                <!-- Honeypot field to prevent spam -->
+                <input type="text" name="_gotcha" style="display: none" />
+                <button type="submit" class="cta-btn pixel-corners">
+                  SEND MESSAGE
+                </button>
+                <div
+                  id="form-status"
+                  class="form-status"
+                  style="margin-top: 15px; display: none"
+                ></div>
+              </form>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
-    
+
     <!-- Footer -->
     <footer>
-        <div class="social-icons">
-            <a href="https://github.com/malavikaswapna" target="_blank" title="GitHub Profile"><i class="fab fa-github"></i></a>
-            <a href="https://www.linkedin.com/in/malavika-swapana-321b92283" target="_blank" title="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
-        </div>
-        <p class="copyright">© 2025 | Created with <span style="color: var(--accent);">♥</span> and pixels</p>
+      <div class="social-icons">
+        <a
+          href="https://github.com/malavikaswapna"
+          target="_blank"
+          title="GitHub Profile"
+          ><i class="fab fa-github"></i
+        ></a>
+        <a
+          href="https://www.linkedin.com/in/malavika-swapana-321b92283"
+          target="_blank"
+          title="LinkedIn Profile"
+          ><i class="fab fa-linkedin"></i
+        ></a>
+      </div>
+      <p class="copyright">
+        © 2025 | Created with <span style="color: var(--accent)">♥</span> and
+        pixels
+      </p>
     </footer>
-    
-    <script>
 
-        // Add this to your existing script
-document.addEventListener('DOMContentLoaded', function() {
-  // Skills loading animation
-  const skillsWindow = document.querySelector('.window:has(.skills)');
-  
-  if (skillsWindow) {
-    // Set up the intersection observer
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // When the skills window is visible, trigger animation
-          setTimeout(() => {
-            const progressBars = entry.target.querySelectorAll('.skill-progress');
-            progressBars.forEach((bar, index) => {
-              // Get the percentage from the style or data attribute
-              const percent = bar.style.width || bar.getAttribute('data-percent');
-              bar.style.setProperty('--skill-percent', percent);
-              
-              // Animate with a slight delay between each bar
-              setTimeout(() => {
-                bar.classList.add('animate');
-              }, index * 300);
-            });
-          }, 500);
-          
-          // Only trigger once
-          observer.unobserve(entry.target);
+    <script>
+      // Add this to your existing script
+      document.addEventListener("DOMContentLoaded", function () {
+        // Skills loading animation
+        const skillsWindow = document.querySelector(".window:has(.skills)");
+
+        if (skillsWindow) {
+          // Set up the intersection observer
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  // When the skills window is visible, trigger animation
+                  setTimeout(() => {
+                    const progressBars =
+                      entry.target.querySelectorAll(".skill-progress");
+                    progressBars.forEach((bar, index) => {
+                      // Get the percentage from the style or data attribute
+                      const percent =
+                        bar.style.width || bar.getAttribute("data-percent");
+                      bar.style.setProperty("--skill-percent", percent);
+
+                      // Animate with a slight delay between each bar
+                      setTimeout(() => {
+                        bar.classList.add("animate");
+                      }, index * 300);
+                    });
+                  }, 500);
+
+                  // Only trigger once
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.3 }
+          );
+
+          // Start observing the skills window
+          observer.observe(skillsWindow);
         }
       });
-    }, { threshold: 0.3 });
-    
-    // Start observing the skills window
-    observer.observe(skillsWindow);
-  }
-});
 
-        function toggleMenu() {
-    const navLinks = document.querySelector('.nav-links');
-    const burger = document.getElementById('menuToggle');
-    navLinks.classList.toggle('show');
-    burger.classList.toggle('active');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menuToggle');
-    if (menuToggle) {
-        menuToggle.addEventListener('click', toggleMenu);
-    }
-});
-
-      document.getElementById('modeToggle').addEventListener('change', function () {
-    if (this.checked) {
-      window.location.href = 'normal.html';
-    } else {
-      window.location.href = 'index.html';
-    }
-  });
-
-  // Auto-check on "Normal Me Stuff" page
-  if (window.location.pathname.includes('normal.html')) {
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('modeToggle').checked = true;
-    });
-  }
-        // Create stars
-        function createStars() {
-            const stars = document.getElementById('stars');
-            const count = 100;
-            
-            for (let i = 0; i < count; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                
-                // Random positions
-                const x = Math.random() * 100;
-                const y = Math.random() * 100;
-                
-                // Random size
-                const size = Math.random() * 3 + 1;
-                
-                // Random animation delay
-                const delay = Math.random() * 2;
-                
-                star.style.left = `${x}%`;
-                star.style.top = `${y}%`;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.animationDelay = `${delay}s`;
-                
-                stars.appendChild(star);
-            }
-        }
-        
-        // Parallax effect
-        function parallax() {
-            const stars = document.getElementById('stars');
-            window.addEventListener('scroll', () => {
-                const scrollY = window.scrollY;
-                stars.style.transform = `translateY(${scrollY * 0.5}px)`;
-            });
-        }
-        
-        // Scroll animations
-        function scrollAnimations() {
-            const fadeElements = document.querySelectorAll('.fade-in');
-            
-            const observer = new IntersectionObserver(entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            fadeElements.forEach(element => {
-                observer.observe(element);
-            });
-        }
-
-        //form handling
-        const contactForm = document.getElementById('contact-form');
-        const formStatus = document.getElementById('form-status');
-        
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                const formData = new FormData(contactForm);
-                const formAction = contactForm.getAttribute('action');
-            
-                // Show loading state
-                formStatus.textContent = "Sending message...";
-                formStatus.style.display = "block";
-                formStatus.style.color = "var(--text)";
-            
-                fetch(formAction, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        return response.json();
-                    }
-                    throw new Error('Network response was not ok.');
-                })
-                .then(data => {
-                    // Success message
-                    formStatus.textContent = "Message sent successfully!";
-                    formStatus.style.color = "#27c93f";
-                    contactForm.reset();
-                
-                    // Hide success message after 3 seconds
-                    setTimeout(() => {
-                        formStatus.style.display = "none";
-                    }, 3000);
-                })
-                .catch(error => {
-                    // Error message
-                    formStatus.textContent = "Oops! There was a problem sending your message.";
-                    formStatus.style.color = "#ff5f56";
-                    console.error('Error:', error);
-                });
-            });
-        }
-
-
-// Add this to your index.html script section
-document.addEventListener('DOMContentLoaded', function() {
-  // Check if we should skip the startup animation
-  const urlParams = new URLSearchParams(window.location.search);
-  const skipStartup = urlParams.get('skipStartup');
-  
-  const windowsStartup = document.getElementById('windows-startup');
-  
-  if (skipStartup === 'true') {
-    // Skip the startup animation if coming from another page via toggle
-    windowsStartup.classList.add('hidden');
-    
-    // Also remove any startup audio that might be created
-    const startupSound = document.querySelector('audio');
-    if (startupSound) {
-      startupSound.remove();
-    }
-    
-    // Set the session storage to remember the startup was shown
-    sessionStorage.setItem('windowsStartupShown', 'true');
-    
-    // Clean up the URL to remove the parameter
-    window.history.replaceState({}, document.title, window.location.pathname);
-  } else {
-    // Normal startup code (your existing code)
-    // Create audio element
-    const startupSound = document.createElement('audio');
-    
-    // Add source with the Vista startup sound
-    const mp3Source = document.createElement('source');
-    mp3Source.src = 'https://www.winhistory.de/more/winstart/mp3/vista.mp3';
-    mp3Source.type = 'audio/mp3';
-    
-    // Add source to audio element
-    startupSound.appendChild(mp3Source);
-    
-    // Set audio properties
-    startupSound.preload = 'auto';
-    startupSound.volume = 0.8; // Slightly lower volume since Vista sound is louder
-    
-    // Add to document body (helps with mobile devices)
-    document.body.appendChild(startupSound);
-    
-    // Check if the user has visited before in this session
-    if (!sessionStorage.getItem('windowsStartupShown')) {
-      // Add message to let users know they need to interact
-      const interactionMessage = document.createElement('p');
-      interactionMessage.className = 'interaction-message';
-      interactionMessage.innerHTML = 'Click anywhere or press any key to start';
-      windowsStartup.querySelector('.startup-content').appendChild(interactionMessage);
-      
-      let hasInteracted = false;
-      
-      // Play startup sound when user interacts with the page
-      function playStartupSequence(event) {
-        // Prevent multiple calls
-        if (hasInteracted) return;
-        hasInteracted = true;
-        
-        // Try to play the sound
-        try {
-          const playPromise = startupSound.play();
-          
-          if (playPromise !== undefined) {
-            playPromise.catch(error => {
-              console.log('Audio playback error:', error);
-            });
-          }
-          
-          console.log('Playing Windows startup sound');
-        } catch (e) {
-          console.log('Error playing sound:', e);
-        }
-        
-        // Hide the interaction message
-        if (interactionMessage) {
-          interactionMessage.style.display = 'none';
-        }
-        
-        // Remove the event listeners after first interaction
-        document.removeEventListener('click', playStartupSequence);
-        document.removeEventListener('keydown', playStartupSequence);
-        
-        // Hide the startup screen after animation completes
-        setTimeout(function() {
-          windowsStartup.classList.add('hidden');
-          // Set session storage to remember the startup was shown
-          sessionStorage.setItem('windowsStartupShown', 'true');
-          
-          if (document.body.contains(startupSound)) {
-            document.body.removeChild(startupSound);
-          }
-        }, 4000);
-        
-        // Prevent default behavior for keyboard events
-        if (event.preventDefault) {
-          event.preventDefault();
-        }
+      function toggleMenu() {
+        const navLinks = document.querySelector(".nav-links");
+        const burger = document.getElementById("menuToggle");
+        navLinks.classList.toggle("show");
+        burger.classList.toggle("active");
       }
-      
-      // Add event listeners for user interaction
-      document.addEventListener('click', playStartupSequence);
-      document.addEventListener('keydown', playStartupSequence);
-    } else {
-      // User has already seen the startup in this session, hide it immediately
-      windowsStartup.classList.add('hidden');
-      
-      if (document.body.contains(startupSound)) {
-        document.body.removeChild(startupSound);
-      }
-    }
-  }
-});
-        
-        // Initialize
-        window.addEventListener('DOMContentLoaded', () => {
-            createStars();
-            parallax();
-            scrollAnimations();
+
+      document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menuToggle");
+        if (menuToggle) {
+          menuToggle.addEventListener("click", toggleMenu);
+        }
+      });
+
+      document
+        .getElementById("modeToggle")
+        .addEventListener("change", function () {
+          if (this.checked) {
+            window.location.href = "normal.html";
+          } else {
+            window.location.href = "index.html";
+          }
         });
+
+      // Auto-check on "Normal Me Stuff" page
+      if (window.location.pathname.includes("normal.html")) {
+        document.addEventListener("DOMContentLoaded", () => {
+          document.getElementById("modeToggle").checked = true;
+        });
+      }
+      // Create stars
+      function createStars() {
+        const stars = document.getElementById("stars");
+        const count = 100;
+
+        for (let i = 0; i < count; i++) {
+          const star = document.createElement("div");
+          star.classList.add("star");
+
+          // Random positions
+          const x = Math.random() * 100;
+          const y = Math.random() * 100;
+
+          // Random size
+          const size = Math.random() * 3 + 1;
+
+          // Random animation delay
+          const delay = Math.random() * 2;
+
+          star.style.left = `${x}%`;
+          star.style.top = `${y}%`;
+          star.style.width = `${size}px`;
+          star.style.height = `${size}px`;
+          star.style.animationDelay = `${delay}s`;
+
+          stars.appendChild(star);
+        }
+      }
+
+      // Parallax effect
+      function parallax() {
+        const stars = document.getElementById("stars");
+        window.addEventListener("scroll", () => {
+          const scrollY = window.scrollY;
+          stars.style.transform = `translateY(${scrollY * 0.5}px)`;
+        });
+      }
+
+      // Scroll animations
+      function scrollAnimations() {
+        const fadeElements = document.querySelectorAll(".fade-in");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        fadeElements.forEach((element) => {
+          observer.observe(element);
+        });
+      }
+
+      //form handling
+      const contactForm = document.getElementById("contact-form");
+      const formStatus = document.getElementById("form-status");
+
+      if (contactForm) {
+        contactForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const formData = new FormData(contactForm);
+          const formAction = contactForm.getAttribute("action");
+
+          // Show loading state
+          formStatus.textContent = "Sending message...";
+          formStatus.style.display = "block";
+          formStatus.style.color = "var(--text)";
+
+          fetch(formAction, {
+            method: "POST",
+            body: formData,
+            headers: {
+              Accept: "application/json",
+            },
+          })
+            .then((response) => {
+              if (response.ok) {
+                return response.json();
+              }
+              throw new Error("Network response was not ok.");
+            })
+            .then((data) => {
+              // Success message
+              formStatus.textContent = "Message sent successfully!";
+              formStatus.style.color = "#27c93f";
+              contactForm.reset();
+
+              // Hide success message after 3 seconds
+              setTimeout(() => {
+                formStatus.style.display = "none";
+              }, 3000);
+            })
+            .catch((error) => {
+              // Error message
+              formStatus.textContent =
+                "Oops! There was a problem sending your message.";
+              formStatus.style.color = "#ff5f56";
+              console.error("Error:", error);
+            });
+        });
+      }
+
+      // Add this to your index.html script section
+      document.addEventListener("DOMContentLoaded", function () {
+        // Check if we should skip the startup animation
+        const urlParams = new URLSearchParams(window.location.search);
+        const skipStartup = urlParams.get("skipStartup");
+
+        const windowsStartup = document.getElementById("windows-startup");
+
+        if (skipStartup === "true") {
+          // Skip the startup animation if coming from another page via toggle
+          windowsStartup.classList.add("hidden");
+
+          // Also remove any startup audio that might be created
+          const startupSound = document.querySelector("audio");
+          if (startupSound) {
+            startupSound.remove();
+          }
+
+          // Set the session storage to remember the startup was shown
+          sessionStorage.setItem("windowsStartupShown", "true");
+
+          // Clean up the URL to remove the parameter
+          window.history.replaceState(
+            {},
+            document.title,
+            window.location.pathname
+          );
+        } else {
+          // Normal startup code (your existing code)
+          // Create audio element
+          const startupSound = document.createElement("audio");
+
+          // Add source with the Vista startup sound
+          const mp3Source = document.createElement("source");
+          mp3Source.src =
+            "https://www.winhistory.de/more/winstart/mp3/vista.mp3";
+          mp3Source.type = "audio/mp3";
+
+          // Add source to audio element
+          startupSound.appendChild(mp3Source);
+
+          // Set audio properties
+          startupSound.preload = "auto";
+          startupSound.volume = 0.8; // Slightly lower volume since Vista sound is louder
+
+          // Add to document body (helps with mobile devices)
+          document.body.appendChild(startupSound);
+
+          // Check if the user has visited before in this session
+          if (!sessionStorage.getItem("windowsStartupShown")) {
+            // Add message to let users know they need to interact
+            const interactionMessage = document.createElement("p");
+            interactionMessage.className = "interaction-message";
+            interactionMessage.innerHTML =
+              "Click anywhere or press any key to start";
+            windowsStartup
+              .querySelector(".startup-content")
+              .appendChild(interactionMessage);
+
+            let hasInteracted = false;
+
+            // Play startup sound when user interacts with the page
+            function playStartupSequence(event) {
+              // Prevent multiple calls
+              if (hasInteracted) return;
+              hasInteracted = true;
+
+              // Try to play the sound
+              try {
+                const playPromise = startupSound.play();
+
+                if (playPromise !== undefined) {
+                  playPromise.catch((error) => {
+                    console.log("Audio playback error:", error);
+                  });
+                }
+
+                console.log("Playing Windows startup sound");
+              } catch (e) {
+                console.log("Error playing sound:", e);
+              }
+
+              // Hide the interaction message
+              if (interactionMessage) {
+                interactionMessage.style.display = "none";
+              }
+
+              // Remove the event listeners after first interaction
+              document.removeEventListener("click", playStartupSequence);
+              document.removeEventListener("keydown", playStartupSequence);
+
+              // Hide the startup screen after animation completes
+              setTimeout(function () {
+                windowsStartup.classList.add("hidden");
+                // Set session storage to remember the startup was shown
+                sessionStorage.setItem("windowsStartupShown", "true");
+
+                if (document.body.contains(startupSound)) {
+                  document.body.removeChild(startupSound);
+                }
+              }, 4000);
+
+              // Prevent default behavior for keyboard events
+              if (event.preventDefault) {
+                event.preventDefault();
+              }
+            }
+
+            // Add event listeners for user interaction
+            document.addEventListener("click", playStartupSequence);
+            document.addEventListener("keydown", playStartupSequence);
+          } else {
+            // User has already seen the startup in this session, hide it immediately
+            windowsStartup.classList.add("hidden");
+
+            if (document.body.contains(startupSound)) {
+              document.body.removeChild(startupSound);
+            }
+          }
+        }
+      });
+
+      // Initialize
+      window.addEventListener("DOMContentLoaded", () => {
+        createStars();
+        parallax();
+        scrollAnimations();
+      });
     </script>
-</body>
+  </body>
 </html>
